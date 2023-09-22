@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	clean_exit(t_game *game)
+int	close_game(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
@@ -26,7 +26,7 @@ int	handle_key_down(int key, t_game *game)
 	else if (key == 124 || key == 65363)
 		game->player.rot_dir = 1;
 	else if (key == 53 || key == 65307)
-		clean_exit(game);
+		close_game(game);
 	return (0);
 }
 

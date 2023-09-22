@@ -11,10 +11,8 @@ void	init_raycast_on_x(t_game *game, int x)
 	game->ray.map_y = (int)game->player.pos.y;
 	game->ray.delta_dist.x = 1e30;
 	game->ray.delta_dist.y = 1e30;
-	if (game->ray.ray_dir.x)
-		game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
-	if (game->ray.ray_dir.y)
-		game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
+	game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
+	game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
 	game->ray.hit = 0;
 	game->ray.draw_start.x = x;
 	game->ray.draw_end.x = x;

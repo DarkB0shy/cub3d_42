@@ -26,7 +26,7 @@ static void   set_map(t_game *game)
     game->map->map[6] = ft_strdup("11110111111111011100000010001");
     game->map->map[7] = ft_strdup("11110111111111011101010010001");
     game->map->map[8] = ft_strdup("11000000110101011100000010001");
-    game->map->map[9] = ft_strdup("1000000000000000110000E000001");
+    game->map->map[9] = ft_strdup("1000000000000000110000N000001");
     game->map->map[10] = ft_strdup("10000000000000001101010010001");
     game->map->map[11] = ft_strdup("11000001110101011111011110001");
     game->map->map[12] = ft_strdup("11110111 1110101 101111010001");
@@ -54,7 +54,7 @@ int main ()
     game.player.pos.y = game.map->player_pos.y;
     mlx_hook(game.win, 2, 1L << 0, handle_key_down, (void *)&game);
 	mlx_hook(game.win, 3, 1L << 1, handle_key_up, (void *)&game);
-    mlx_hook(game.win, 17, 0, clean_exit, (void *)&game);
+    mlx_hook(game.win, 17, 0, close_game, (void *)&game);
 	mlx_loop_hook(game.mlx, update, (void *)&game);
     mlx_loop(game.mlx);
     return (0);

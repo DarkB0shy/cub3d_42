@@ -105,7 +105,7 @@ u_int64_t	get_time(void);
 void		ft_sleep(u_int64_t time);
 int			handle_key_up(int key, t_game *game);
 int			handle_key_down(int key, t_game *game);
-int			clean_exit(t_game *game);
+int			close_game(t_game *game);
 int			update(t_game *game);
 void		casting_ray(t_game *game);
 void    	render_line(t_game *game, int x);
