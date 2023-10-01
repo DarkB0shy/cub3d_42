@@ -3,65 +3,50 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tde-nico <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: dcarassi <dcarassi@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/10 11:12:35 by tde-nico          #+#    #+#              #
-#    Updated: 2022/01/26 11:21:02 by tde-nico         ###   ########.fr        #
+#    Created: 2023/01/22 10:49:25 by dcarassi          #+#    #+#              #
+#    Updated: 2023/01/22 22:32:45 by dcarassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES_A = ft_isdigit ft_memset ft_strjoin ft_strtrim ft_isprint\
-ft_putchar_fd ft_strlcat ft_substr ft_atoi ft_itoa ft_putendl_fd\
-ft_strlcpy ft_tolower ft_bzero ft_memcpy ft_putnbr_fd ft_strlen\
-ft_toupper ft_calloc ft_memchr ft_putstr_fd ft_strmapi ft_isalnum\
-ft_memcmp ft_split ft_strncmp ft_isalpha ft_memcpy ft_strchr\
-ft_strnstr ft_isascii ft_memmove ft_strdup ft_strrchr ft_striteri
-
-FILES_B = ft_lstadd_back ft_lstadd_front ft_lstclear ft_lstdelone\
-		ft_lstiter ft_lstlast ft_lstnew ft_lstsize\
-		ft_lstmap
-
-FT_PRINTF = ft_printf utils parse_flags process_types_1 \
-		process_types_2 ft_putunbr_base
-
-FILES = $(FILES_A) $(FT_PRINTF)
-#FILES = $(FT_PRINTF)
-
-NAME = libft.a
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
+LIB1 = ar -rcs
+LIB2 = ranlib
 RM = rm -f
+NAME = libft.a
+INCLUDE = libft.h
+SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
+ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
+ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c \
+ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c \
+ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
+ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-INCS = includes
+OBJS = $(SRCS:.c=.o)
 
-SRCS_DIR = ./
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-SRCS_B = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES_B)))
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJS_DIR = ./
-OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
+BONUSOBJS = $(BONUS:.c=.o)
 
+all:	$(OBJS) $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c -o $@ $< -I${INCS}
+$(OBJS):	$(INCLUDE)
 
-$(NAME): $(OBJS)
-	$(AR) $@ $^
-
-bonus: $(OBJS_B)
-	$(AR) $(NAME) $^
-
-all: $(NAME)
+$(NAME):	$(OBJS) $(INCLUDE)
+	$(LIB1) $(NAME) $(OBJS)
+	$(LIB2) $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_B)
+	@$(RM) $(OBJS) $(BONUSOBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:	clean
+	@$(RM) $(NAME)
 
-re: clean all
+re: fclean all
 
-.PHONY: bonus all clean fclean re
+bonus: $(BONUSOBJS)
+	@$(LIB1) $(NAME) $(BONUSOBJS)

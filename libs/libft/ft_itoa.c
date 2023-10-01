@@ -3,49 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-nico <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dcarassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 08:14:48 by tde-nico          #+#    #+#             */
-/*   Updated: 2022/01/13 08:23:50 by tde-nico         ###   ########.fr       */
+/*   Created: 2023/01/21 14:58:11 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/01/21 14:59:25 by dcarassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*format_itoa(int mem, char *str, int size)
+static	int	get_length(long n)
 {
-	while (mem > 9 || mem < -9)
+	int	i;
+
+	i = 1;
+	if (n < 0)
 	{
-		if (mem < 0)
-			str[size--] = -(mem % 10) + '0';
-		else
-			str[size--] = mem % 10 + '0';
-		mem = mem / 10;
+		n *= -1;
+		i++;
 	}
-	str[0] = (mem + '0');
-	if (mem < 0)
-	{
-		str[0] = '-';
-		str[1] = (-mem + '0');
-	}
-	return (str);
+	while (n / 10 > 0 && i++)
+		n = n / 10;
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	size_t	size;
-	int		mem;
+	char	*d;
+	long	nb;
+	size_t	len;
 
-	mem = n;
-	size = 2;
-	if (n < 0)
-		size = 3;
-	while ((n > 9 || n < -9) && size++)
-		n /= 10;
-	str = (char *) malloc((size--) * sizeof(*str));
-	if (!str)
+	nb = n;
+	len = get_length(nb) + 1;
+	d = (char *)malloc(sizeof(char) * len);
+	if (!d)
 		return (NULL);
-	str[size--] = '\0';
-	return (format_itoa(mem, str, size));
+	if (nb < 0)
+	{
+		nb *= -1;
+		d[0] = '-';
+	}
+	d[--len] = '\0';
+	if (nb == 0)
+		d[0] = '0';
+	while (nb)
+	{
+		d[--len] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	return (d);
 }

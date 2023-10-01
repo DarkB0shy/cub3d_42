@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-nico <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dcarassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 12:16:59 by tde-nico          #+#    #+#             */
-/*   Updated: 2022/01/17 10:54:31 by tde-nico         ###   ########.fr       */
+/*   Created: 2023/01/21 19:42:43 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/01/21 19:47:44 by dcarassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (*needle == '\0' || needle == NULL)
-		return ((char *) haystack);
-	while (haystack[i] != '\0' && i < len)
+	if (!haystack || len == 0)
+		return (0);
+	if (needle[0] == '\0' || needle == haystack)
+		return ((char *)haystack);
+	while (haystack[i] != '\0')
 	{
 		j = 0;
-		while (needle[j] == haystack[i + j] && i + j < len)
+		while (haystack[i + j] == needle[j] && (i + j) < len)
 		{
-			if (needle[j + 1] == '\0')
-			{
-				return ((char *) haystack + i);
-			}
+			if (haystack[i + j] == '\0' && needle[j] == '\0')
+				return ((char *)&haystack[i]);
 			j++;
 		}
+		if (needle[j] == '\0')
+			return ((char *)(haystack + i));
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

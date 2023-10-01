@@ -11,8 +11,6 @@ int	close_game(t_game *game)
 
 int	handle_key_down(int key, t_game *game)
 {
-	if (!ft_strncmp("", "inputs", 6))
-		ft_printf("key down: %d\n", key);
 	if (key == 13 || key == 119)
 		game->player.mov_dir.x = -1;
 	else if (key == 1 || key == 115)
@@ -32,8 +30,6 @@ int	handle_key_down(int key, t_game *game)
 
 int handle_key_up(int key, t_game *game)
 {
-	if (!ft_strncmp("", "inputs", 6))
-		ft_printf("key up: %d\n", key);
 	if (key == 13 || key == 1 || key == 119 || key == 115)
 		game->player.mov_dir.x = 0;
 	else if (key == 0 || key == 2 || key == 97 || key == 100)

@@ -3,33 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-nico <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dcarassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 08:12:53 by tde-nico          #+#    #+#             */
-/*   Updated: 2022/01/17 10:58:48 by tde-nico         ###   ########.fr       */
+/*   Created: 2023/01/20 12:52:53 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/01/20 16:42:02 by dcarassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(const char *s1, const char *set)
+static	int	set_check(char const c, char const *set)
 {
-	size_t	start;
-	size_t	end;
-	char	*str;
+	int	i;
 
-	str = NULL;
-	if (s1 && set)
+	i = 0;
+	while (set[i] != '\0')
 	{
-		start = 0;
-		end = ft_strlen(s1);
-		while (s1[start] && ft_strchr(set, s1[start]))
-			start++;
-		while (s1[end - 1] && ft_strchr(set, s1[end - 1]) && end > start)
-			end--;
-		str = (char *) malloc(sizeof(*str) * (end - start + 1));
-		if (str)
-			ft_strlcpy(str, &s1[start], end - start + 1);
+		if (set[i] == c)
+			return (1);
+		i++;
 	}
-	return (str);
+	return (0);
+}
+
+static	char	*fill_d(char *restrict dest, const char *restrict src, size_t l)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < l)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*d;
+	size_t	full_length;
+
+	if (!set || !s1)
+		return (NULL);
+	while (s1)
+	{
+		if (set_check(((char)*s1), set) == 1)
+			s1++;
+		else
+			break ;
+	}
+	full_length = ft_strlen(s1);
+	while (full_length != 0)
+	{
+		if (set_check(s1[full_length - 1], set) == 1)
+			full_length--;
+		else
+			break ;
+	}
+	d = (char *) malloc (full_length * sizeof(char) + 1);
+	if (!d)
+		return (NULL);
+	d = fill_d(d, s1, full_length);
+	return (d);
 }

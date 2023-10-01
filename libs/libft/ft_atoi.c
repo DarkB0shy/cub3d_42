@@ -3,35 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-nico <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dcarassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 12:19:23 by tde-nico          #+#    #+#             */
-/*   Updated: 2022/01/20 08:47:21 by tde-nico         ###   ########.fr       */
+/*   Created: 2023/01/21 17:01:07 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/01/21 17:06:20 by dcarassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+static	int	ft_whitespaces(const char *nptr, int *ptr_i)
 {
-	int					sign;
-	int					i;
-	unsigned long long	n;
+	int	i;
 
 	i = 0;
-	sign = 1;
-	n = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			sign *= -1;
-	while (str[i] >= 48 && str[i] <= 57)
-		n = (n * 10) + (str[i++] - 48);
-	if (n >= 9223372036854775808ULL)
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i = i + 1;
+	if (nptr[i] == 45)
 	{
-		if (sign == 1)
-			return (-1);
-		else
-			return (0);
+		i = i + 1;
+		*ptr_i = i;
+		return (-1);
 	}
-	return ((int)n * sign);
+	else if (nptr[i] == 43)
+	{
+		i = i + 1;
+		*ptr_i = i;
+		return (1);
+	}
+	else if (!(nptr[i] >= 48 && nptr[i] <= 57))
+	{
+		*ptr_i = i;
+		return (0);
+	}
+	*ptr_i = i;
+	return (1);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	result;
+	int	j;
+
+	result = 0;
+	i = 0;
+	j = ft_whitespaces(nptr, &i);
+	while (nptr[i] && (nptr[i] >= 48 && nptr[i] <= 57))
+	{
+		result = result * 10;
+		result += nptr[i] - 48;
+		i = i + 1;
+	}
+	result = result * j;
+	return (result);
 }
