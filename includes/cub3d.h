@@ -12,7 +12,7 @@
 
 //  Screen and player
 # define FPS_LOCK 30
-# define PLAYER_FOV 0.90
+# define PLAYER_FOV 0.42
 # define PLAYER_SPEED 3.0
 # define PLAYER_ROTATION_SPEED 2.0
 #define HEIGHT 720
