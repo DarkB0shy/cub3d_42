@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	init_raycast_on_x(t_game *game, int x)
+static void	init_raycast_on_x(t_game *game, int x)
 {
 	game->ray.camera_x = 2.0 * (double)x / (double)WIDTH - 1;
 	game->ray.ray_dir.x = game->player.dir.x
@@ -18,7 +18,7 @@ void	init_raycast_on_x(t_game *game, int x)
 	game->ray.draw_end.x = x;
 }
 
-void	dda_part_one(t_game *game)
+static void	dda_part_one(t_game *game)
 {
 	if (game->ray.ray_dir.x < 0)
 	{
@@ -46,7 +46,7 @@ void	dda_part_one(t_game *game)
 	}
 }
 
-void	dda_part_two(t_game *game)
+static void	dda_part_two(t_game *game)
 {
 	while (game->ray.hit == 0)
 	{
@@ -67,7 +67,7 @@ void	dda_part_two(t_game *game)
 	}
 }
 
-void	get_line_dim(t_game *game)
+static void	get_line_dim(t_game *game)
 {
 	if (game->ray.side == 0)
 		game->ray.perp_wall_dist = (game->ray.side_dist.x

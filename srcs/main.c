@@ -52,8 +52,8 @@ int main ()
     init_player_and_textures(&game);
     game.player.pos.x = game.map->player_pos.x;
     game.player.pos.y = game.map->player_pos.y;
-    mlx_hook(game.win, 2, 1L << 0, handle_key_down, (void *)&game);
-	mlx_hook(game.win, 3, 1L << 1, handle_key_up, (void *)&game);
+    mlx_hook(game.win, 2, 1L << 0, update_key_down, (void *)&game);
+	mlx_hook(game.win, 3, 1L << 1, update_key_up, (void *)&game);
     mlx_hook(game.win, 17, 0, close_game, (void *)&game);
 	mlx_loop_hook(game.mlx, update, (void *)&game);
     mlx_loop(game.mlx);
