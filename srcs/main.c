@@ -52,12 +52,22 @@ int main (int argc, char **argv)
     }
     else
     {
-        parse_map(&game, argv[1]);
-        free_matrix(game.cub_file.file_matrix);
-        free(game.map.nord);
-        free(game.map.sud);
-        free(game.map.east);
-        free(game.map.west);
+        int fd = 0;
+        fd = open(argv[1], fd);
+        if (fd == -1)
+        {
+            std_errore("file must exist\n");
+            exit(1);
+        }
+        else
+        {
+            parse_map(&game, argv[1]);
+            free_matrix(game.cub_file.file_matrix);
+            free(game.map->nord);
+            free(game.map->sud);
+            free(game.map->east);
+            free(game.map->west);
+        }
         // init_player_and_textures(&game);
         // game.player.pos.x = game.map->player_pos.x;
         // game.player.pos.y = game.map->player_pos.y;

@@ -18,7 +18,7 @@ static int	check_format_file(char *str)
 			i--;
 		if (str[i] == '.')
 			return(0);
-		std_errore("wrong file extension: must be .cub");
+		std_errore("wrong file extension: must be .cub\n");
 		exit(1);
 	}
 }
