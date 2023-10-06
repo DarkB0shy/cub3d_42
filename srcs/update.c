@@ -46,8 +46,8 @@ static void	draw_floor_and_ceiling(t_game *game)
 		begin.y = y;
 		end.y = y;
 		draw_line_on(&game->screen, begin, end, create_trgb(0,
-				game->map->ceilling_color[0], game->map->ceilling_color[1],
-				game->map->ceilling_color[2]));
+				game->map->ceiling_color[0], game->map->ceiling_color[1],
+				game->map->ceiling_color[2]));
 	}
 	y -= 1;
 	while (++y < HEIGHT)

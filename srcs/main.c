@@ -8,7 +8,7 @@ int	std_errore(char *str)
 	i = -1;
 	while (str[++i])
 		write(2, &str[i], 1);
-	return (i);
+    exit(1);
 }
 
 // static void   set_map(t_game *game)
@@ -33,9 +33,9 @@ int	std_errore(char *str)
 // 	game->map->sud = "./xpms/s_wall.xpm";
 // 	game->map->west = "./xpms/w_wall.xpm";
 // 	game->map->east = "./xpms/e_wall.xpm";
-//     game->map->ceilling_color[0] = 255;
+//     game->map->ceiling_color[0] = 255;
 //     game->map->ceilling_color[1] = 100;
-//     game->map->ceilling_color[2] = 0;
+//     game->map->ceiling_color[2] = 0;
 //     game->map->floor_color[0] = 225;
 //     game->map->floor_color[1] = 30;
 //     game->map->floor_color[2] = 0;
@@ -46,22 +46,16 @@ int main (int argc, char **argv)
     t_game   game;
 
     if (argc != 2)
-    {
         std_errore("usage: ./cub3d path/to/map\n");
-        exit(1);
-    }
     else
     {
         int fd = 0;
         fd = open(argv[1], fd);
         if (fd == -1)
-        {
             std_errore("file must exist\n");
-            exit(1);
-        }
         else
         {
-            parse_map(&game, argv[1]);
+            init_map(&game, argv[1]);
             free_matrix(game.cub_file.file_matrix);
             free(game.map->nord);
             free(game.map->sud);

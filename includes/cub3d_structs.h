@@ -10,6 +10,8 @@ typedef struct cubfile
 	char	*sud_path;
 	char	*east_path;
 	char	*west_path;
+	char	*f_color;
+	char	*c_color;
 }	t_cubfile;
 
 typedef struct s_vec2
@@ -37,11 +39,11 @@ typedef struct s_map
 	char	*west;
 	char	*east;
 	int		floor_color[3];
-	int		ceilling_color[3];
+	int		ceiling_color[3];
 	int		width;
 	int		height;
 	int		floor;
-	int		ceilling;
+	int		ceiling;
 }	t_map;
 
 typedef struct s_player

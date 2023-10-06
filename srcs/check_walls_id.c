@@ -19,10 +19,7 @@ void	check_walls_id(t_game *game)
 					if (game->cub_file.file_matrix[i][++j] == 'O')
 						game->cub_file.nord_path = ft_strdup(game->cub_file.file_matrix[i]);
 					else
-					{
-						std_errore("wrong wall identifier, should be NO\n");
-						exit(1);
-					}
+						std_errore("missing/wrong wall identifier\n");
 					break;
 				}
 				if (game->cub_file.file_matrix[i][j] == 'S')
@@ -30,10 +27,7 @@ void	check_walls_id(t_game *game)
 					if (game->cub_file.file_matrix[i][++j] == 'O')
 						game->cub_file.sud_path = ft_strdup(game->cub_file.file_matrix[i]);
 					else
-					{
-						std_errore("wrong wall identifier, should be SO\n");
-						exit(1);
-					}
+						std_errore("missing/wrong wall identifier\n");
 					break;
 				}
 				if (game->cub_file.file_matrix[i][j] == 'W')
@@ -41,10 +35,7 @@ void	check_walls_id(t_game *game)
 					if (game->cub_file.file_matrix[i][++j] == 'E')
 						game->cub_file.west_path = ft_strdup(game->cub_file.file_matrix[i]);
 					else
-					{
-						std_errore("wrong wall identifier, should be WE\n");
-						exit(1);
-					}
+						std_errore("missing/wrong wall identifier\n");
 					break;
 				}
 				if (game->cub_file.file_matrix[i][j] == 'E')
@@ -52,10 +43,7 @@ void	check_walls_id(t_game *game)
 					if (game->cub_file.file_matrix[i][++j] == 'A')
 						game->cub_file.east_path = ft_strdup(game->cub_file.file_matrix[i]);
 					else
-					{
-						std_errore("wrong wall identifier, should be EA\n");
-						exit(1);
-					}
+						std_errore("missing/wrong wall identifier\n");
 					break;
 				}
 			}
@@ -65,7 +53,7 @@ void	check_walls_id(t_game *game)
             && game->cub_file.west_path && game->cub_file.east_path)
             break;
 		i++;
-	}
+    }
 }
 
 void    check_walls_path(t_game *game)
@@ -99,10 +87,9 @@ void    check_walls_path(t_game *game)
         }
         else
         {
-            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
             free(game->cub_file.nord_path);
             free(game->map->nord);
-            exit(1);
+            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
     free(game->cub_file.nord_path);  
@@ -133,10 +120,9 @@ void    check_walls_path(t_game *game)
         }
         else
         {
-            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
             free(game->cub_file.sud_path);
             free(game->map->sud);
-            exit(1);
+            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
     free(game->cub_file.sud_path);  
@@ -167,10 +153,9 @@ void    check_walls_path(t_game *game)
         }
         else
         {
-            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
             free(game->cub_file.east_path);
             free(game->map->east);
-            exit(1);
+            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
     free(game->cub_file.east_path);  
@@ -201,10 +186,9 @@ void    check_walls_path(t_game *game)
         }
         else
         {
-            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
             free(game->cub_file.west_path);
             free(game->map->west);
-            exit(1);
+            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
     free(game->cub_file.west_path);  
