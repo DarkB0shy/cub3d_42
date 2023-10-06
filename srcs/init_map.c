@@ -22,6 +22,8 @@ static int	check_format_file(char *str)
 	}
 }
 
+
+
 static void init_game_struct(t_game *game)
 {
     game->map = malloc(sizeof(t_map));

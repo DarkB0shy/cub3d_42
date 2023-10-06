@@ -9,7 +9,7 @@ void	free_matrix(char **matrix)
 		return ;
 	while (matrix[++i])
 		free(matrix[i]);
-	// free(matrix);
+	free(matrix);
 }
 
 void	free_map(t_game *game)
@@ -22,7 +22,11 @@ int	close_game(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
+	free_matrix(game->cub_file.file_matrix);
+    free(game->map->nord);
+    free(game->map->sud);
+    free(game->map->east);
+    free(game->map->west);
 	free_map(game);
 	exit(0);
-	return (0);
 }
