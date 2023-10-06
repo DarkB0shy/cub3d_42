@@ -3,7 +3,7 @@ SO ./xpms/s_wall.xpm
 WE ./xpms/w_wall.xpm
 EA ./xpms/e_wall.xpm
 
-F 220,100,0             
+F 220,100,0            
 C 255,30,0
 
            1111111111111111111111111

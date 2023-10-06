@@ -24,6 +24,7 @@ void		init_player_and_textures(t_game *game);
 void    	check_walls_id(t_game *game);
 void        check_walls_path(t_game *game);
 void        check_background_color(t_game *game);
+void        parse_map(t_game *game, int file_len);
 char        *gnl(int fd);
 
 // Rendering

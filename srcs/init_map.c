@@ -78,4 +78,5 @@ void	init_map(t_game *game, char *file)
 	check_walls_id(game);
 	check_walls_path(game);
 	check_background_color(game);
+	parse_map(game, i);
 }

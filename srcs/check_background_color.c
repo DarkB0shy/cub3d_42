@@ -62,7 +62,7 @@ static void    check_if_floor_input_ok(t_game *game)
                     break;
                 while (game->cub_file.f_color[i] == 32) // white spaces
                     i++;
-                if (game->cub_file.f_color[i] == '\n')
+                if (game->cub_file.f_color[i] == '\n' || game->cub_file.f_color[i] == '\0')
                 {
                     count++;
                     break;
@@ -76,10 +76,24 @@ static void    check_if_floor_input_ok(t_game *game)
                     std_errore("invalid character in RBG floor value\n");
             }
         }
+        if (count == 3)
+            break;
         i++;
     }
+    if (count == 3)
+    {
+        if (game->cub_file.f_color[i] == '\0' || game->cub_file.f_color[i] == '\n')
+            return ;
+        else
+        {
+            while (ft_isdigit(game->cub_file.f_color[i]))
+                i++;
+            if (game->cub_file.f_color[i] && !ft_isdigit(game->cub_file.f_color[i]))
+                count++;
+        }
+    }
     if (count != 3)
-        std_errore("missing at least one RBG floor value\n");
+        std_errore("RBG floor value is unvalid\n");
 }
 
 static void    check_if_ceiling_input_ok(t_game *game)
@@ -106,7 +120,7 @@ static void    check_if_ceiling_input_ok(t_game *game)
                     break;
                 while (game->cub_file.c_color[i] == 32) // white spaces
                     i++;
-                if (game->cub_file.c_color[i] == '\n')
+                if (game->cub_file.c_color[i] == '\n' || game->cub_file.c_color[i] == '\0')
                 {
                     count++;
                     break;
@@ -120,10 +134,24 @@ static void    check_if_ceiling_input_ok(t_game *game)
                     std_errore("invalid character in RBG ceiling value\n");
             }
         }
+        if (count == 3)
+            break;
         i++;
     }
+    if (count == 3)
+    {
+        if (game->cub_file.c_color[i] == '\0' || game->cub_file.c_color[i] == '\n')
+            return ;
+        else
+        {
+            while (ft_isdigit(game->cub_file.c_color[i]))
+                i++;
+            if (game->cub_file.c_color[i] && !ft_isdigit(game->cub_file.c_color[i]))
+                count++;
+        }
+    }
     if (count != 3)
-        std_errore("missing at least one RBG ceiling value\n");
+        std_errore("RBG ceiling value is unvalid\n");
 }
 
 void    check_background_color(t_game *game)
