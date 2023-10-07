@@ -185,13 +185,17 @@ static void check_rgbs(t_game *game)
 void    check_background_color(t_game *game)
 {
     int i;
+    int j;
 
     i = 0;
     while (game->cub_file.file_matrix[i])
     {
-        if (game->cub_file.file_matrix[i][0] == 'F')
+        j = 0;
+        while (game->cub_file.file_matrix[i][j] && game->cub_file.file_matrix[i][j] == 32)
+            j++;
+        if (game->cub_file.file_matrix[i][j] == 'F')
             game->cub_file.f_color = ft_strdup(game->cub_file.file_matrix[i]);
-        else if (game->cub_file.file_matrix[i][0] == 'C')
+        else if (game->cub_file.file_matrix[i][j] == 'C')
             game->cub_file.c_color = ft_strdup(game->cub_file.file_matrix[i]);        
         i++;
     }

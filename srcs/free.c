@@ -8,8 +8,11 @@ void	free_matrix(char **matrix)
 	if (!matrix)
 		return ;
 	while (matrix[++i])
-		free(matrix[i]);
-	// free(matrix);
+	{
+		if(matrix[i])
+			free(matrix[i]);
+	}
+	free(matrix);
 }
 
 void	free_map(t_game *game)

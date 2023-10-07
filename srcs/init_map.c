@@ -74,6 +74,7 @@ void	init_map(t_game *game, char *file)
 			game->cub_file.file_matrix[++i] = ft_strdup(temp);
 		free(temp);
 		temp = gnl(fd);
+
 	}
 	free(temp);
 	close(fd);
