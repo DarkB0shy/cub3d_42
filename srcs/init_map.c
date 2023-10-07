@@ -61,7 +61,7 @@ void	init_map(t_game *game, char *file)
 
 	init_game_struct(game);
 	check_format_file(file);
-	game->cub_file.file_matrix = malloc(sizeof(char *) * 97);
+	game->cub_file.file_matrix = malloc(sizeof(char *) * 50);
 	game->cub_file.file_matrix[0] = 0;
 	fd = open(file, O_RDONLY);
 	i = -1;
@@ -74,9 +74,9 @@ void	init_map(t_game *game, char *file)
 			game->cub_file.file_matrix[++i] = ft_strdup(temp);
 		free(temp);
 		temp = gnl(fd);
-
 	}
 	free(temp);
+	game->cub_file.file_matrix[i] = 0;
 	close(fd);
 	check_walls_id(game);
 	check_walls_path(game);
