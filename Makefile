@@ -36,29 +36,29 @@ endif
 all: $(NAME)
 
 $(NAME): $(LIBS) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(LINKER_MAC) -I $(INCLUDE) $(OBJS) $(LIBS) $(LINKER_LINUX) -o $@
+	$(CC) $(CFLAGS) $(LINKER_MAC) -I $(INCLUDE) $(OBJS) $(LIBS) $(LINKER_LINUX) -o $@
 	@$(CLEAR)
 	@echo "[+] $(NAME) compiled$(END)"
 
 $(OBJ_DIR):
-	@mkdir -p $@
+	mkdir -p $@
 	@echo "[+] $@ folder created$(END)"
 
 $(LIBFT):
-	@make -s -C $(LIBFT_DIR)
+	make -s -C $(LIBFT_DIR)
 	@echo "[+] libft compiled$(END)"
 
 $(MLX_LINUX):
-	@chmod +x $(MLX_LINUX_DIR)/configure
-	@make -s -C $(MLX_LINUX_DIR) 2> /dev/null 1> /dev/null
+	chmod +x $(MLX_LINUX_DIR)/configure
+	make -s -C $(MLX_LINUX_DIR) 2> /dev/null 1> /dev/null
 	@echo "[+] mlx_linux compiled$(END)"
 
 $(MLX):
-	@make -s -C $(MLX_DIR) 2> /dev/null
+	make -s -C $(MLX_DIR) 2> /dev/null
 	@echo "[+] mlx compiled$(END)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	@$(CC) $(CFLAGS) -I $(INCLUDE) $(LINUX_OBJ_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INCLUDE) $(LINUX_OBJ_FLAGS) -c $< -o $@
 	@echo "[+] $@ compiled$(END)"
 
 clean:

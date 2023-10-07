@@ -9,7 +9,7 @@ void	free_matrix(char **matrix)
 		return ;
 	while (matrix[++i])
 		free(matrix[i]);
-	free(matrix);
+	// free(matrix);
 }
 
 void	free_map(t_game *game)

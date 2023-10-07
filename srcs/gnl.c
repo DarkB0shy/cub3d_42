@@ -2,7 +2,7 @@
 
 char    *gnl(int fd)
 {
-  static char   buffer[256];
+  static char   buffer[1000];
   static int    max_buffer_pos = 0;
   static int    buffer_pos = -1;
   char          *line;
@@ -12,7 +12,7 @@ char    *gnl(int fd)
     return (NULL);
   if (buffer_pos == max_buffer_pos || buffer_pos == -1)
   {
-    max_buffer_pos = read(fd, &buffer, 256);
+    max_buffer_pos = read(fd, &buffer, 1000);
     buffer_pos = 0;
   }
   if (max_buffer_pos < 1)

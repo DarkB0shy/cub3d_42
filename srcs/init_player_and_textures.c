@@ -12,29 +12,30 @@ static int	check_if_more_players(t_game *game)
 		while (game->map->map[y][++x])
 		{
 			if (ft_strchr("NSWE", game->map->map[y][x]))
-			{
-				return (1);
-			}
+				std_errore("more than one player in map\n");
 		}
 	}
 	return (0);
 }
 
-static int	set_player_pos(t_map *map)
+static int	set_player_pos(t_game *game)
 {
-	int	y;
-	int	x;
+	int	i;
+	int	j;
 
-	y = -1;
-	while (map->map[++y])
+	i = -1;
+	game->map->player_pos.x = 0;
+	game->map->player_pos.y = 0;
+	while (game->map->map[++i])
 	{
-		x = -1;
-		while (map->map[y][++x])
+		j = -1;
+		while (game->map->map[i][++j])
 		{
-			if (ft_strchr("NSWE", map->map[y][x]))
+			if (game->map->map[i][j] == 'N' || game->map->map[i][j] == 'S'
+				|| game->map->map[i][j] == 'W' || game->map->map[i][j] == 'E')
 			{
-				map->player_pos.x = x;
-				map->player_pos.y = y;
+				game->map->player_pos.x = j;
+				game->map->player_pos.y = i;
 				return (1);
 			}
 		}
@@ -72,7 +73,7 @@ static void	set_player_dir_and_plane(t_game *game)
 
 static int    init_player(t_game *game)
 {
-    if (set_player_pos(game->map))
+    if (set_player_pos(game))
     {
 		game->player.pos.x = (int)game->map->player_pos.x;
 		game->player.pos.y = (int)game->map->player_pos.y;
@@ -93,11 +94,7 @@ static int    init_player(t_game *game)
         }
     }
     else
-	{
-		free_map(game);
-        printf("Map Error\n");
-		exit(0);
-	}
+		std_errore("player is missing from map\n");
 	return (1);
 }
 
@@ -112,12 +109,20 @@ void init_player_and_textures(t_game *game)
 			&game->screen.endian);
 	game->walls[0].img = mlx_xpm_file_to_image(game->mlx,
 			game->map->nord, &(game->wall_heights[0]), &(game->wall_widths[0]));
+	if (game->walls[0].img == NULL)
+		std_errore("north wall xpm is unvalid\n");
 	game->walls[1].img = mlx_xpm_file_to_image(game->mlx,
 			game->map->sud, &(game->wall_heights[1]), &(game->wall_widths[1]));
+	if (game->walls[1].img == NULL)
+		std_errore("sud wall xpm is unvalid\n");
 	game->walls[2].img = mlx_xpm_file_to_image(game->mlx,
 			game->map->west, &(game->wall_heights[2]), &(game->wall_widths[2]));
+	if (game->walls[2].img == NULL)
+		std_errore("west wall xpm is unvalid\n");
 	game->walls[3].img = mlx_xpm_file_to_image(game->mlx,
 			game->map->east, &(game->wall_heights[3]), &(game->wall_widths[3]));
+	if (game->walls[3].img == NULL)
+		std_errore("east wall xpm is unvalid\n");
 	game->walls[0].addr = mlx_get_data_addr(game->walls[0].img,
 			&game->walls[0].bits_per_pixel, &game->walls[0].line_length,
 			&game->walls[0].endian);

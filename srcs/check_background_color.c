@@ -154,21 +154,51 @@ static void    check_if_ceiling_input_ok(t_game *game)
         std_errore("RBG ceiling value is unvalid\n");
 }
 
+static int  check_rgb_range(int noomba)
+{
+    if (noomba >= 0 && noomba <= 255)
+        return (1);
+    else
+        return (0);
+}
+
+static void check_rgbs(t_game *game)
+{
+    int i;
+
+    i = 0;
+    while (game->map->floor_color[i])
+    {
+        if (!check_rgb_range(game->map->floor_color[i]))
+            std_errore("RGB floor values must be between 0 and 255\n");
+        i++;
+    }
+    i = 0;
+    while (game->map->ceiling_color[i])
+    {
+        if (!check_rgb_range(game->map->ceiling_color[i]))
+            std_errore("RGB ceiling values must be between 0 and 255\n");
+        i++;
+    }
+}
+
 void    check_background_color(t_game *game)
 {
     int i;
 
-    i = -1;
-    while (game->cub_file.file_matrix[++i])
+    i = 0;
+    while (game->cub_file.file_matrix[i])
     {
         if (game->cub_file.file_matrix[i][0] == 'F')
             game->cub_file.f_color = ft_strdup(game->cub_file.file_matrix[i]);
         else if (game->cub_file.file_matrix[i][0] == 'C')
             game->cub_file.c_color = ft_strdup(game->cub_file.file_matrix[i]);        
+        i++;
     }
     if (!game->cub_file.f_color || !game->cub_file.c_color)
         std_errore("missing floor/ceiling RGB identifier\n");
     check_if_floor_input_ok(game);
     check_if_ceiling_input_ok(game);
     save_background_values(game);
+    check_rgbs(game);
 }

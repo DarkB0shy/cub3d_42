@@ -92,7 +92,7 @@ void    check_walls_path(t_game *game)
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
-    free(game->cub_file.nord_path);  
+    // free(game->cub_file.nord_path);  
 
     i = 0;
     game->map->sud = malloc(256);
@@ -125,7 +125,7 @@ void    check_walls_path(t_game *game)
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
-    free(game->cub_file.sud_path);  
+    // free(game->cub_file.sud_path);  
     
     i = 0;
     game->map->east = malloc(256);
@@ -158,7 +158,7 @@ void    check_walls_path(t_game *game)
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
-    free(game->cub_file.east_path);  
+    // free(game->cub_file.east_path);  
 
     i = 0;
     game->map->west = malloc(256);
@@ -191,5 +191,5 @@ void    check_walls_path(t_game *game)
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
-    free(game->cub_file.west_path);  
+    // free(game->cub_file.west_path);  
 }
