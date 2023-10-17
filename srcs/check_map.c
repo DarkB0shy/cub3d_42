@@ -62,6 +62,7 @@ static void    actually_parse_map(t_game *game, int starting_pos, int file_len)
     int k;      // count characters
 
     game->map->map = malloc(sizeof(char *) * (file_len - starting_pos + 1));
+    game->map->n_lines = file_len - starting_pos - 1;
     i = starting_pos;
     j = 0;
     while (game->cub_file.file_matrix[i] && game->cub_file.file_matrix[i][0] != '\n'

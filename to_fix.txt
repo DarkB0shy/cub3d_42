@@ -2,4 +2,3 @@
 #0  FILE_CHECK:         arguments inside file.cub must be in order (wall paths->RGBS->map)
   ~ BUGS
 #0  MEMORY LEAK:        after closing program (compiling with -fsanitizer) inside gnl loop in init_map
-#1  SEGMENTATION FAULT: at line 65 in dda_part_two only when you try to rotate camera 180 degrees without moving when you spawn

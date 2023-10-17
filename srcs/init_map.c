@@ -40,10 +40,9 @@ static void init_game_struct(t_game *game)
 	game->map->player_pos.x = 0;
 	game->map->player_pos.y = 0;
 	game->map->map = NULL;
-	game->map->width = 0;
-	game->map->height = 0;
 	game->map->floor = 0;
 	game->map->ceiling = 0;
+	game->map->n_lines = 0;
 	//cubfile
 	game->cub_file.nord_path = NULL;
 	game->cub_file.sud_path = NULL;

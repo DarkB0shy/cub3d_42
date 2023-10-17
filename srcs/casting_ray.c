@@ -11,8 +11,10 @@ static void	init_raycast_on_x(t_game *game, int x)
 	game->ray.map_y = (int)game->player.pos.y;
 	game->ray.delta_dist.x = 1e30;
 	game->ray.delta_dist.y = 1e30;
-	game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
-	game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
+	// if (game->ray.ray_dir.x)
+		game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
+	// if (game->ray.ray_dir.y)
+		game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
 	game->ray.hit = 0;
 	game->ray.draw_start.x = x;
 	game->ray.draw_end.x = x;
@@ -55,20 +57,22 @@ static void	dda_part_two(t_game *game)
 			game->ray.side_dist.x += game->ray.delta_dist.x;
 			game->ray.map_x += game->ray.step_x;
 			game->ray.side = 0;
+			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
+				game->ray.hit = 1;
 		}
 		else
 		{
 			game->ray.side_dist.y += game->ray.delta_dist.y;
 			game->ray.map_y += game->ray.step_y;
 			game->ray.side = 1;
-		}
-		if (game->map->map[game->ray.map_y][game->ray.map_x])
-		{
+			if (game->ray.map_y > game->map->n_lines)
+				break ;
 			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
 				game->ray.hit = 1;
 		}
-		else
-			break ;
+		// if (!game->map->map[game->ray.map_y][game->ray.map_x])
+			// break ;
+			// game->ray.hit = 0;
 	}
 }
 

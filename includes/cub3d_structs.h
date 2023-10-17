@@ -40,10 +40,9 @@ typedef struct s_map
 	char	*east;
 	int		floor_color[3];
 	int		ceiling_color[3];
-	int		width;
-	int		height;
 	int		floor;
 	int		ceiling;
+	int		n_lines;
 }	t_map;
 
 typedef struct s_player
