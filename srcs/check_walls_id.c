@@ -17,7 +17,14 @@ void	check_walls_id(t_game *game)
 				if (game->cub_file.file_matrix[i][j] == 'N')
 				{
 					if (game->cub_file.file_matrix[i][++j] == 'O')
-						game->cub_file.nord_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    {
+                        if (game->cub_file.nord_path)
+                        {
+                            free(game->cub_file.nord_path);
+                            std_errore("double NO wall identifier\n");
+                        }
+                        game->cub_file.nord_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    }
 					else
 						std_errore("missing/wrong wall identifier\n");
 					break;
@@ -25,7 +32,14 @@ void	check_walls_id(t_game *game)
 				else if (game->cub_file.file_matrix[i][j] == 'S')
 				{
 					if (game->cub_file.file_matrix[i][++j] == 'O')
-						game->cub_file.sud_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    {
+                        if (game->cub_file.sud_path)
+                        {
+                            free(game->cub_file.sud_path);
+                            std_errore("double SO wall identifier\n");
+                        }
+                        game->cub_file.sud_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    }
 					else
 						std_errore("missing/wrong wall identifier\n");
 					break;
@@ -33,7 +47,14 @@ void	check_walls_id(t_game *game)
 				else if (game->cub_file.file_matrix[i][j] == 'W')
 				{
 					if (game->cub_file.file_matrix[i][++j] == 'E')
-						game->cub_file.west_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    {
+                        if (game->cub_file.west_path)
+                        {
+                            free(game->cub_file.west_path);
+                            std_errore("double WE wall identifier\n");
+                        }
+                        game->cub_file.west_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    }
 					else
 						std_errore("missing/wrong wall identifier\n");
 					break;
@@ -41,11 +62,24 @@ void	check_walls_id(t_game *game)
 				else if (game->cub_file.file_matrix[i][j] == 'E')
 				{
 					if (game->cub_file.file_matrix[i][++j] == 'A')
-						game->cub_file.east_path = ft_strdup(game->cub_file.file_matrix[i]);
+                    {
+                        if (game->cub_file.east_path)
+                        {
+                            free(game->cub_file.east_path);
+                            std_errore("double EA identifier\n");
+                        }
+                        else
+                        {
+                            game->cub_file.east_path = ft_strdup(game->cub_file.file_matrix[i]);
+                            break ;
+                        }
+                    }
 					else
 						std_errore("missing/wrong wall identifier\n");
 					break;
 				}
+                if (game->cub_file.nord_path && game->cub_file.sud_path && game->cub_file.west_path && game->cub_file.east_path)
+                    break ;
                 else
                 {
                     std_errore("at least one wall identifier is wrong\n");
@@ -53,10 +87,8 @@ void	check_walls_id(t_game *game)
                 }
 			}
 			j++;
+
 		}
-        if (game->cub_file.nord_path && game->cub_file.sud_path 
-            && game->cub_file.west_path && game->cub_file.east_path)
-            break;
 		i++;
     }
 }
@@ -66,6 +98,8 @@ void    check_walls_path(t_game *game)
     size_t     i;
     int     j;
 
+    if (!game->cub_file.file_matrix[0])
+        std_errore("bruh.mp4\n");
     i = 0;
     game->map->nord = malloc(256);
     if (game->cub_file.nord_path[i])

@@ -57,6 +57,7 @@ int main (int argc, char **argv)
         else
         {
             init_map(&game, argv[1]);
+            close(fd);
             init_player_and_textures(&game);
             game.player.pos.x = game.map->player_pos.x;
             game.player.pos.y = game.map->player_pos.y;

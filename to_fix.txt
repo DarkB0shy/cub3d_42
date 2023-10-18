@@ -1,0 +1,9 @@
+    ~TO DO
+#0      Add check for double C identifier in .cub file
+#1      Tegridy file check
+#2      Handle walls_path memory on errors (
+          NSWE
+          If there is a problem with S, free(N, S);
+          if there is a problem with W, free(N, S, W);
+          if there is a problem with E you can figure what to do
+          )
