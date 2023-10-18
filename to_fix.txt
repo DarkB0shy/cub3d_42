@@ -1,2 +1,0 @@
-  ~ BUGS
-#0  HEAP BUFFER OVERFLOW:           compiling with -fsanitizer at srcs/check_map.c:85. I am a chimney sweeper.

@@ -9,7 +9,7 @@ void	free_matrix(char **matrix)
 		return ;
 	while (matrix[++i])
 	{
-		if(matrix[i])
+		if(matrix[i] != 0)
 		// {
 		// 	printf("Freeing: %s\n", matrix[i]);
 			free(matrix[i]);
