@@ -10,10 +10,10 @@ void	free_matrix(char **matrix)
 	while (matrix[++i])
 	{
 		if(matrix[i])
-		{
-			printf("%s\n", matrix[i]);
+		// {
+		// 	printf("Freeing: %s\n", matrix[i]);
 			free(matrix[i]);
-		}
+		// }
 	}
 	free(matrix);
 }
@@ -21,7 +21,7 @@ void	free_matrix(char **matrix)
 void	free_map(t_game *game)
 {
 	free_matrix(game->map->map);
-    // free(game->map);
+    free(game->map);
 }
 
 int	close_game(t_game *game)

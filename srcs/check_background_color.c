@@ -190,10 +190,20 @@ void    check_background_color(t_game *game)
     i = 0;
     while (game->cub_file.file_matrix[i])
     {
+        if (game->cub_file.f_color && game->cub_file.c_color)
+            break ;
         j = 0;
         while (game->cub_file.file_matrix[i][j] && game->cub_file.file_matrix[i][j] == 32)
             j++;
-        if (game->cub_file.file_matrix[i][j] == 'F')
+        if (game->cub_file.file_matrix[i][j] == 'N' || game->cub_file.file_matrix[i][j] == 'S'
+            || game->cub_file.file_matrix[i][j] == 'W' || game->cub_file.file_matrix[i][j] == 'E')
+        {
+            i++;
+            continue;
+        }
+        if (ft_isdigit(game->cub_file.file_matrix[i][j]))
+            std_errore("map must be last element of the .cub file!\n");
+        else if (game->cub_file.file_matrix[i][j] == 'F')
             game->cub_file.f_color = ft_strdup(game->cub_file.file_matrix[i]);
         else if (game->cub_file.file_matrix[i][j] == 'C')
             game->cub_file.c_color = ft_strdup(game->cub_file.file_matrix[i]);        

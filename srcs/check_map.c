@@ -5,11 +5,11 @@ static int	check_if_map_closed(t_game *game)
 	size_t	y;
 	size_t	x;
 
-	y = -1;
-	while (game->map->map[++y])
+	y = 0;
+	while (game->map->map[y])
 	{
-		x = -1;
-		while (game->map->map[y][++x])
+		x = 0;
+		while (game->map->map[y][x])
 		{
 			if (!ft_strchr(" NSWEDO01", game->map->map[y][x]))
             {
@@ -28,7 +28,9 @@ static int	check_if_map_closed(t_game *game)
             	std_errore("a brick in the wall is missing\n");
                 free_map(game);
             }
+            x++;
         }
+        y++;
 	}
 	return (0);
 }

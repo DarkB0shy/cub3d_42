@@ -64,7 +64,6 @@ void	init_map(t_game *game, char *file)
 	game->cub_file.file_matrix[0] = 0;
 	fd = open(file, O_RDONLY);
 	i = -1;
-	// temp = gnl(fd);
 	while (1)
 	{
 		temp = gnl(fd);
@@ -73,10 +72,8 @@ void	init_map(t_game *game, char *file)
 		game->cub_file.file_matrix[++i] = ft_strdup(temp);
 		free(temp);
 	}
-	// free(temp);
 	game->cub_file.file_matrix[i + 1] = 0;
 	close(fd);
-	// CHECK MAP ORDER(GAME);
 	check_walls_id(game);
 	check_walls_path(game);
 	check_background_color(game);
