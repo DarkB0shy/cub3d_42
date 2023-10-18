@@ -1,4 +1,4 @@
   ~ MUST ADD
-#0  FILE_CHECK:         arguments inside file.cub must be in order (wall paths->RGBS->map)
+#0  FILE_CHECK:                     arguments inside file.cub must be in order (wall paths->RGBS->map)
   ~ BUGS
-#0  MEMORY LEAK:        after closing program (compiling with -fsanitizer) inside gnl loop in init_map
+#0  HEAP BUFFER OVERFLOW:           compiling with -fsanitizer at srcs/check_map.c:85. I am a chimney sweeper.

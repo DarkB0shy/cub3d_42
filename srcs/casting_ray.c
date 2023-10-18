@@ -70,9 +70,6 @@ static void	dda_part_two(t_game *game)
 			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
 				game->ray.hit = 1;
 		}
-		// if (!game->map->map[game->ray.map_y][game->ray.map_x])
-			// break ;
-			// game->ray.hit = 0;
 	}
 }
 

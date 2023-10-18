@@ -43,13 +43,14 @@ int	std_errore(char *str)
 
 int main (int argc, char **argv)
 {
-    t_game   game;
+    t_game  game;
+    int     fd;
 
     if (argc != 2)
-        std_errore("usage: ./cub3d path/to/map\n");
+        std_errore("correct use is ./cub3d path/to/map\n");
     else
     {
-        int fd = 0;
+        fd = 0;
         fd = open(argv[1], fd);
         if (fd == -1)
             std_errore("file must exist\n");
