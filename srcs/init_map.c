@@ -22,8 +22,6 @@ static int	check_format_file(char *str)
 	}
 }
 
-
-
 static void init_game_struct(t_game *game)
 {
     game->map = malloc(sizeof(t_map));
@@ -60,7 +58,7 @@ void	init_map(t_game *game, char *file)
 
 	init_game_struct(game);
 	check_format_file(file);
-	game->cub_file.file_matrix = malloc(sizeof(char *) * 50);
+	game->cub_file.file_matrix = malloc(sizeof(char *) * FILE_SIZE);
 	game->cub_file.file_matrix[0] = 0;
 	fd = open(file, O_RDONLY);
 	i = -1;

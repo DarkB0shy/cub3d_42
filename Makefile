@@ -45,16 +45,16 @@ $(OBJ_DIR):
 	@echo "[+] $@ folder created$(END)"
 
 $(LIBFT):
-	make -s -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 	@echo "[+] libft compiled$(END)"
 
 $(MLX_LINUX):
 	chmod +x $(MLX_LINUX_DIR)/configure
-	make -s -C $(MLX_LINUX_DIR) 2> /dev/null 1> /dev/null
+	make -C $(MLX_LINUX_DIR) 2> /dev/null 1> /dev/null
 	@echo "[+] mlx_linux compiled$(END)"
 
 $(MLX):
-	make -s -C $(MLX_DIR) 2> /dev/null
+	make -C $(MLX_DIR) 2> /dev/null
 	@echo "[+] mlx compiled$(END)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c

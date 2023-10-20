@@ -1,0 +1,4 @@
+Just:
+$make
+$./cub3d maps/smth_wrong.cub
+Yeah. Kinda bad tbh ngl. It's either ignorable OR addressable.

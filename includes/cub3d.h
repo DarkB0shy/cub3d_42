@@ -16,6 +16,7 @@
 # define HEIGHT 720
 # define WIDTH 1280
 # define TEXTURE_SIZE 64
+# define FILE_SIZE 75
 
 // Parsing
 

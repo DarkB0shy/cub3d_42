@@ -11,11 +11,12 @@ static void	init_raycast_on_x(t_game *game, int x)
 	game->ray.map_y = (int)game->player.pos.y;
 	game->ray.delta_dist.x = 1e30;
 	game->ray.delta_dist.y = 1e30;
-	// if (game->ray.ray_dir.x)
+	if (game->ray.ray_dir.x)
 		game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
-	// if (game->ray.ray_dir.y)
+	if (game->ray.ray_dir.y)
 		game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
 	game->ray.hit = 0;
+	game->ray.draw_start.x = 0;
 	game->ray.draw_start.x = x;
 	game->ray.draw_end.x = x;
 }
@@ -75,13 +76,19 @@ static void	dda_part_two(t_game *game)
 
 static void	get_line_dim(t_game *game)
 {
+
 	if (game->ray.side == 0)
+	{
+		printf("SIDE_DIST_X: %f\t DELTA_DIST_X: %f\n", game->ray.side_dist.x, game->ray.delta_dist.x);
 		game->ray.perp_wall_dist = (game->ray.side_dist.x
 				- game->ray.delta_dist.x);
+	}
 	else
 		game->ray.perp_wall_dist = (game->ray.side_dist.y
 				- game->ray.delta_dist.y);
+	// printf("RAY_SIDE: %d\tPERP-WALL-DIST: %f\n", game->ray.side, game->ray.perp_wall_dist);
 	game->ray.line_height = (int)(HEIGHT / game->ray.perp_wall_dist);
+	game->ray.draw_start.y = 0;
 	game->ray.draw_start.y = -game->ray.line_height / 2 + HEIGHT / 2;
 	if (game->ray.draw_start.y < 0)
 		game->ray.draw_start.y = 0;

@@ -81,10 +81,7 @@ void	check_walls_id(t_game *game)
                 if (game->cub_file.nord_path && game->cub_file.sud_path && game->cub_file.west_path && game->cub_file.east_path)
                     break ;
                 else
-                {
                     std_errore("at least one wall identifier is wrong\n");
-                    break;
-                }
 			}
 			j++;
 
@@ -159,6 +156,7 @@ void    check_walls_path(t_game *game)
         }
         else
         {
+            // free(game->map->nord);
             free(game->cub_file.sud_path);
             free(game->map->sud);
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
@@ -166,39 +164,6 @@ void    check_walls_path(t_game *game)
     }
     free(game->cub_file.sud_path);  
     
-    i = 0;
-    game->map->east = malloc(256);
-    if (game->cub_file.east_path[i])
-    {
-        while (game->cub_file.east_path[i] && game->cub_file.east_path[i] == 32)
-            i++;
-        i += 2;
-        while (game->cub_file.east_path[i] && game->cub_file.east_path[i] == 32)
-            i++;
-        if (game->cub_file.east_path[i] == '.' && game->cub_file.east_path[i + 1] == '/')
-        {
-            j = -1;
-            while (game->cub_file.east_path[i] && game->cub_file.east_path[i] != '\n')
-            {
-                if (game->cub_file.east_path[i] == ' ')
-                    i++;
-                if (game->cub_file.east_path[i] && game->cub_file.east_path[i] != ' ' && game->cub_file.east_path[i] != '\n')
-                {
-                    game->map->east[++j] = game->cub_file.east_path[i];
-                    i++;
-                }
-            }
-            game->map->east[j + 1] = '\0';
-        }
-        else
-        {
-            free(game->cub_file.east_path);
-            free(game->map->east);
-            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
-        }
-    }
-    free(game->cub_file.east_path);  
-
     i = 0;
     game->map->west = malloc(256);
     if (game->cub_file.west_path[i])
@@ -225,10 +190,48 @@ void    check_walls_path(t_game *game)
         }
         else
         {
+            // free(game->map->nord);
+            // free(game->map->sud);
             free(game->cub_file.west_path);
             free(game->map->west);
             std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
         }
     }
-    free(game->cub_file.west_path);  
+    free(game->cub_file.west_path);
+
+    i = 0;
+    game->map->east = malloc(256);
+    if (game->cub_file.east_path[i])
+    {
+        while (game->cub_file.east_path[i] && game->cub_file.east_path[i] == 32)
+            i++;
+        i += 2;
+        while (game->cub_file.east_path[i] && game->cub_file.east_path[i] == 32)
+            i++;
+        if (game->cub_file.east_path[i] == '.' && game->cub_file.east_path[i + 1] == '/')
+        {
+            j = -1;
+            while (game->cub_file.east_path[i] && game->cub_file.east_path[i] != '\n')
+            {
+                if (game->cub_file.east_path[i] == ' ')
+                    i++;
+                if (game->cub_file.east_path[i] && game->cub_file.east_path[i] != ' ' && game->cub_file.east_path[i] != '\n')
+                {
+                    game->map->east[++j] = game->cub_file.east_path[i];
+                    i++;
+                }
+            }
+            game->map->east[j + 1] = '\0';
+        }
+        else
+        {
+            // free(game->map->nord);
+            // free(game->map->sud);
+            // free(game->map->west);
+            free(game->cub_file.east_path);
+            free(game->map->east);
+            std_errore("invalid texture path. Correct use is NO ./path/to/.xpm\n");
+        }
+    }
+    free(game->cub_file.east_path);  
 }
