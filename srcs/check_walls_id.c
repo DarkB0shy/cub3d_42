@@ -95,7 +95,7 @@ void    check_walls_path(t_game *game)
     size_t     i;
     int     j;
 
-    if (!game->cub_file.file_matrix[0])
+    if (!game->cub_file.nord_path)
         std_errore("bruh.mp4\n");
     i = 0;
     game->map->nord = malloc(256);

@@ -31,14 +31,11 @@ static void	draw_line_texture(t_game *game, int x)
 	y = 0;
 	tex.x = get_texture_x(game);
 	step = 1.0 * TEXTURE_SIZE / game->ray.line_height;
-	// printf("ALTEZZA LINEA / 2: %d\n", game->ray.line_height / 2);
 	tex_pos = (game->ray.draw_start.y - HEIGHT / 2 + game->ray.line_height / 2)
 		* step;
 	y = game->ray.draw_start.y - 1;
-	// printf("Y VALe: %d\tRAY VALe: %f\n", y, game->ray.draw_start.y - 1);
 	while (++y < game->ray.draw_end.y)
 	{
-		// printf("Disegn ai %d\n", y);
 		tex.y = (int)tex_pos & (TEXTURE_SIZE - 1);
 		tex_pos += step;
 		color = *(unsigned int *)(game->walls[game->ray.color].addr + 4 * (TEXTURE_SIZE * (int)tex.y + (int)tex.x));
