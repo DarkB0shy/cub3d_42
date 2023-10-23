@@ -59,8 +59,14 @@ int main (int argc, char **argv)
             init_map(&game, argv[1]);
             close(fd);
             init_player_and_textures(&game);
-            game.player.pos.x = game.map->player_pos.x;
-            game.player.pos.y = game.map->player_pos.y;
+            // game.player.pos.x = game.map->player_pos.x;
+            // game.player.pos.y = game.map->player_pos.y;
+            // game.player.mov_dir.y = 1;
+            // update_player(&game);
+            // printf("slept\n");
+            // game.player.mov_dir.y = 0;
+            // update_player(&game);
+            // printf("%f\t%f\n", game.player.mov_dir.x, game.player.mov_dir.y);
             mlx_hook(game.win, 2, 1L << 0, update_key_down, (void *)&game);
             mlx_hook(game.win, 3, 1L << 1, update_key_up, (void *)&game);
             mlx_hook(game.win, 17, 0, close_game, (void *)&game);

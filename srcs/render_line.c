@@ -34,6 +34,7 @@ static void	draw_line_texture(t_game *game, int x)
 	tex_pos = (game->ray.draw_start.y - HEIGHT / 2 + game->ray.line_height / 2)
 		* step;
 	y = game->ray.draw_start.y - 1;
+	// printf("Y: %d\n", y);
 	while (++y < game->ray.draw_end.y)
 	{
 		tex.y = (int)tex_pos & (TEXTURE_SIZE - 1);
@@ -45,6 +46,11 @@ static void	draw_line_texture(t_game *game, int x)
 
 void    render_line(t_game *game, int x)
 {
+	// if (game->ray.side == 2)
+	// {
+		// return ;
+	// 	// do some magic so that walls are rendered properly when the player spawns in a corner
+	// }
 	if (game->ray.side == 1 && game->player.pos.y <= game->ray.map_y)
 		game->ray.color = 1;
 	else if (game->ray.side == 1)

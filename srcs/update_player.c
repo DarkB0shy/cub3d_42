@@ -9,7 +9,7 @@ static int	check_wall_collision(t_game *game, double y, double x)
 	return (1);
 }
 
-static void	update_player_x(t_game *game)
+void	update_player_x(t_game *game)
 {
 	if (game->player.mov_dir.x == -1)
 	{
@@ -31,7 +31,7 @@ static void	update_player_x(t_game *game)
 	}
 }
 
-static void	update_player_y(t_game *game)
+void	update_player_y(t_game *game)
 {
 	if (game->player.mov_dir.y == 1)
 	{

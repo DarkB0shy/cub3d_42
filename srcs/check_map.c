@@ -13,7 +13,7 @@ static int	check_if_map_closed(t_game *game)
 		{
 			if (!ft_strchr(" NSWEDO01", game->map->map[y][x]))
             {
-				std_errore("wrong characters in game->map->map\n");
+				std_errore("wrong character/s inside map\n");
                 free_map(game);
             }
             if (ft_strchr("NSWE", game->map->map[y][x]) && ((!y || !x || !game->map->map[y + 1]

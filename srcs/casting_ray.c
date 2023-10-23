@@ -58,10 +58,10 @@ static void	dda_part_two(t_game *game)
 			game->ray.side_dist.x += game->ray.delta_dist.x;
 			game->ray.map_x += game->ray.step_x;
 			game->ray.side = 0;
+			if (game->ray.side_dist.x == game->ray.delta_dist.x)
+				game->ray.side = 2;
 			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
 				game->ray.hit = 1;
-			if (game->ray.side_dist.x == game->ray.delta_dist.x)
-				game->ray.side = 2 ;
 		}
 		else
 		{
@@ -78,24 +78,28 @@ static void	dda_part_two(t_game *game)
 
 static void	get_line_dim(t_game *game)
 {
-
 	if (game->ray.side == 0)
-	{
+	// {
 		// if (game->ray.side_dist.x == game->ray.delta_dist.x)
 		// 	game->ray.delta_dist.x = game->ray.side_dist.x / 2.00000;
 		game->ray.perp_wall_dist = (game->ray.side_dist.x
 				- game->ray.delta_dist.x);
-		printf("SIDE_DIST_X: %f\tDELTA_DIST_X:%f\n", game->ray.side_dist.x, game->ray.delta_dist.x);
 		// if (game->ray.delta_dist.x == 0.0)
 			// game->ray.delta_dist.x = 0.1;
-	}
+	// }
 	else if (game->ray.side == 1)
-	{
+	// {
 		game->ray.perp_wall_dist = (game->ray.side_dist.y
 				- game->ray.delta_dist.y);
-	}
+	// }
 	else if (game->ray.side == 2)
+	// {
+		// printf("SIDE_DIST_X: %f\tDELTA_DIST_X:%f\n", game->ray.side_dist.x, game->ray.delta_dist.x);
+		// game->ray.perp_wall_dist = 0.1;
+		// game->ray.perp_wall_dist = 2.0;
 		return ;
+	// }
+	// printf("RAY_SIDE = %d; PERP WALL: %f\n", game->ray.side, game->ray.perp_wall_dist);
 	game->ray.line_height = (int)(HEIGHT / game->ray.perp_wall_dist);
 	game->ray.draw_start.y = 0;
 	game->ray.draw_start.y = -game->ray.line_height / 2 + HEIGHT / 2;

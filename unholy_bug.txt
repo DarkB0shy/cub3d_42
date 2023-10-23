@@ -1,5 +1,7 @@
                                                                                                     UNHOLY_BUG
 
+$make
+$./cub4d maps/smth_wrong.cub
 
 It's either ignorable OR addressable. When the player spawns at the corner of map:
 game->ray.line_height = -2147483648 @ render_line.c/33 when it divides TEXTURE_SIZE, because
@@ -47,3 +49,4 @@ if (game->ray.side_dist.x == game->ray.delta_dist.x)
 This (casting_ray.c/63) avoids executing "useless" istructions when those values are the same. 1523 value stopped appearing. I
 also addedd a condition inside get_line_dim (casting_ray.c) that handles game->ray.side == 2. It just returns ;
 This made the rendering a bit better but it's still not showing the wall the player "spawned into".
+That game->ray.side = 2 MUST and I mean MUST be handled inside render_line/render_line.c.
