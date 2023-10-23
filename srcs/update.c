@@ -88,5 +88,10 @@ int update(t_game *game)
     mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
     update_frames(game);
 	update_player(game);
+	if (game->kinda_global)
+	{
+		game->kinda_global = 0;
+		game->player.mov_dir.y = 0;
+	}
     return (0);
 }

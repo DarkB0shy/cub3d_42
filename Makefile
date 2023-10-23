@@ -36,7 +36,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(LIBS) $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(LINKER_MAC) -I $(INCLUDE) $(OBJS) $(LIBS) $(LINKER_LINUX) -o $@
+	$(CC) $(CFLAGS) $(LINKER_MAC) -I $(INCLUDE) $(OBJS) $(LIBS) $(LINKER_LINUX) -o $(NAME)
 	@$(CLEAR)
 	@echo "[+] $(NAME) compiled$(END)"
 

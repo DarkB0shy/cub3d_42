@@ -46,11 +46,6 @@ static void	draw_line_texture(t_game *game, int x)
 
 void    render_line(t_game *game, int x)
 {
-	// if (game->ray.side == 2)
-	// {
-		// return ;
-	// 	// do some magic so that walls are rendered properly when the player spawns in a corner
-	// }
 	if (game->ray.side == 1 && game->player.pos.y <= game->ray.map_y)
 		game->ray.color = 1;
 	else if (game->ray.side == 1)

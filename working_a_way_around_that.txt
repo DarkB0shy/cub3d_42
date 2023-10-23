@@ -1,0 +1,6 @@
+I realized there is no point in trying to understand mathematics. What I did was "move the player slighlty away from the wall"
+and making it stop immediately after. This only works with player facing North and a wall (1) on his left side. But it should
+work with every spawning orientation as long as the player moves according to the following "rule":
+          (N -> game.player.mov_dir.y = 1) When player has a wall on his left side.
+Yeah. Good luck making it work with NSWE and 4 possible walls configuration.
+!LEONE BIANCO CON GLI OCCHIALI!

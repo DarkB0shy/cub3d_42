@@ -91,6 +91,7 @@ typedef struct s_game
 	int			wall_widths[3];
 	int			wall_heights[3];
 	int			fps;
+	int			kinda_global; 					// To render decently when player spawns next to walls
 }	t_game;
 
 # endif
