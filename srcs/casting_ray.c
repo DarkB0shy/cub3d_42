@@ -10,8 +10,8 @@ static void	init_raycast_on_x(t_game *game, int x)
 	game->ray.map_x = (int)game->player.pos.x;
 	game->ray.map_y = (int)game->player.pos.y;
 	// printf("PLAYER_POS_X: %f\tRAY_MAP_X:%d\n", game->player.pos.x, game->ray.map_x);
-	game->ray.delta_dist.x = 4.20;
-	game->ray.delta_dist.y = 4.20;
+	game->ray.delta_dist.x = 1523.00;
+	game->ray.delta_dist.y = 1523.00;
 	game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
 	game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
 	game->ray.hit = 0;
@@ -25,25 +25,25 @@ static void	dda_part_one(t_game *game)
 	if (game->ray.ray_dir.x < 0)
 	{
 		game->ray.step_x = -1;
-		game->ray.side_dist.x = (game->player.pos.x + 1.0 - game->ray.map_x)
+		game->ray.side_dist.x = (game->player.pos.x - game->ray.map_x + 0.1)
 			* game->ray.delta_dist.x;
 	}
 	else
 	{
 		game->ray.step_x = 1;
-		game->ray.side_dist.x = (game->ray.map_x + 1.0 - game->player.pos.x)
+		game->ray.side_dist.x = (game->ray.map_x - game->player.pos.x + 1.0)
 			* game->ray.delta_dist.x;
 	}
 	if (game->ray.ray_dir.y < 0)
 	{
 		game->ray.step_y = -1;
-		game->ray.side_dist.y = (game->player.pos.y + 1.0 - game->ray.map_y)
+		game->ray.side_dist.y = (game->player.pos.y - game->ray.map_y + 0.1)
 			* game->ray.delta_dist.y;
 	}
 	else
 	{
 		game->ray.step_y = 1;
-		game->ray.side_dist.y = (game->ray.map_y + 1.0 - game->player.pos.y)
+		game->ray.side_dist.y = (game->ray.map_y - game->player.pos.y + 1.0)
 			* game->ray.delta_dist.y;
 	}
 }
@@ -57,8 +57,8 @@ static void	dda_part_two(t_game *game)
 			game->ray.side_dist.x += game->ray.delta_dist.x;
 			game->ray.map_x += game->ray.step_x;
 			game->ray.side = 0;
-			// if (game->ray.side_dist.x == game->ray.delta_dist.x)
-				// game->ray.side = 2; // Handles player spawning at corner?
+			if (game->ray.side_dist.x == game->ray.delta_dist.x)
+				game->ray.side = 2; // Handles player spawning at corner?
 			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
 				game->ray.hit = 1;
 		}
