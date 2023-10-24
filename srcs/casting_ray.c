@@ -2,19 +2,18 @@
 
 static void	init_raycast_on_x(t_game *game, int x)
 {
-	game->ray.camera_x = 2.0 * (double)x / (double)WIDTH - 1;
+	game->ray.camera_x = 3.0 * (double)x / (double)WIDTH - 1;
 	game->ray.ray_dir.x = game->player.dir.x
 		+ game->player.plane.x * game->ray.camera_x;
 	game->ray.ray_dir.y = game->player.dir.y
 		+ game->player.plane.y * game->ray.camera_x;
 	game->ray.map_x = (int)game->player.pos.x;
 	game->ray.map_y = (int)game->player.pos.y;
-	game->ray.delta_dist.x = 1e30;
-	game->ray.delta_dist.y = 1e30;
-	if (game->ray.ray_dir.x)
-		game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
-	if (game->ray.ray_dir.y)
-		game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
+	// printf("PLAYER_POS_X: %f\tRAY_MAP_X:%d\n", game->player.pos.x, game->ray.map_x);
+	game->ray.delta_dist.x = 4.20;
+	game->ray.delta_dist.y = 4.20;
+	game->ray.delta_dist.x = fabs(1 / game->ray.ray_dir.x);
+	game->ray.delta_dist.y = fabs(1 / game->ray.ray_dir.y);
 	game->ray.hit = 0;
 	game->ray.draw_start.x = 0;
 	game->ray.draw_start.x = x;
@@ -26,7 +25,7 @@ static void	dda_part_one(t_game *game)
 	if (game->ray.ray_dir.x < 0)
 	{
 		game->ray.step_x = -1;
-		game->ray.side_dist.x = (game->player.pos.x - game->ray.map_x)
+		game->ray.side_dist.x = (game->player.pos.x + 1.0 - game->ray.map_x)
 			* game->ray.delta_dist.x;
 	}
 	else
@@ -38,7 +37,7 @@ static void	dda_part_one(t_game *game)
 	if (game->ray.ray_dir.y < 0)
 	{
 		game->ray.step_y = -1;
-		game->ray.side_dist.y = (game->player.pos.y - game->ray.map_y)
+		game->ray.side_dist.y = (game->player.pos.y + 1.0 - game->ray.map_y)
 			* game->ray.delta_dist.y;
 	}
 	else
@@ -114,8 +113,8 @@ void	casting_ray(t_game *game)
 {
 	int		x;
 
-	x = -1;
-	while (++x < WIDTH)
+	x = 0;
+	while (++x < WIDTH - 1)
 	{
 		init_raycast_on_x(game, x);
 		dda_part_one(game);

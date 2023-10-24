@@ -2,11 +2,13 @@
 
 static int	check_wall_collision(t_game *game, double y, double x)
 {
-	if (game->map->map[(int)y][(int)x] == '0')
-		return (0);
-	if (game->map->map[(int)y][(int)x] == 'O')
-		return (0);
-	return (1);
+	// if (game->map->map[(int)y][(int)x] == '0')
+	// 	return (0);
+	// if (game->map->map[(int)y][(int)x] == 'O')
+	// 	return (0);
+	if (game->map->map[(int)y][(int)x] == '1')
+		return (1);
+	return (0);
 }
 
 void	update_player_x(t_game *game)

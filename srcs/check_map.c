@@ -47,9 +47,8 @@ static int  find_map_start(t_game *game)
         while (game->cub_file.file_matrix[i][j] && game->cub_file.file_matrix[i][j] == 32)
             j++;
         if (game->cub_file.file_matrix[i][j] == 'N' || game->cub_file.file_matrix[i][j] == 'S'
-            || game->cub_file.file_matrix[i][j] == 'W' || game->cub_file.file_matrix[i][j] == 'E'
-            || game->cub_file.file_matrix[i][j] == 'F' || game->cub_file.file_matrix[i][j] == 'C')
-            j++;
+            || game->cub_file.file_matrix[i][j] == 'W' || game->cub_file.file_matrix[i][j] == 'E')
+                j++;
         else if (game->cub_file.file_matrix[i][j] == '1')
             break;
         i++;

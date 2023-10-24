@@ -59,8 +59,9 @@ int main (int argc, char **argv)
             init_map(&game, argv[1]);
             close(fd);
             init_player_and_textures(&game);
-            game.player.mov_dir.y = 1;
-            update_player(&game);
+            // game.player.mov_dir.y = -1;
+            // game.player.mov_dir.x = 1;
+            // update_player(&game);
             mlx_hook(game.win, 3, 1L << 1, update_key_up, (void *)&game);
             mlx_hook(game.win, 2, 1L << 0, update_key_down, (void *)&game);
             mlx_hook(game.win, 17, 0, close_game, (void *)&game);
