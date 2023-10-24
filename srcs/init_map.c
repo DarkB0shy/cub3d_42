@@ -24,7 +24,6 @@ static int	check_format_file(char *str)
 
 static void init_game_struct(t_game *game)
 {
-	game->kinda_global = 1; // HANDLES SPAWNING AT CORNER OF MAP?
     game->map = malloc(sizeof(t_map));
 	game->map->nord = NULL;
 	game->map->sud = NULL;

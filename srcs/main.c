@@ -41,6 +41,15 @@ int	std_errore(char *str)
     // game->map->floor_color[2] = 0;
 // }
 
+static void gaming(t_game *game)
+{
+    mlx_hook(game->win, 3, 1L << 1, update_key_up, (void *)game);
+    mlx_hook(game->win, 2, 1L << 0, update_key_down, (void *)game);
+    mlx_hook(game->win, 17, 0, close_game, (void *)game);
+    mlx_loop_hook(game->mlx, update, (void *)game);
+    mlx_loop(game->mlx);
+}
+
 int main (int argc, char **argv)
 {
     t_game  game;
@@ -59,14 +68,7 @@ int main (int argc, char **argv)
             init_map(&game, argv[1]);
             close(fd);
             init_player_and_textures(&game);
-            // game.player.mov_dir.y = -1;
-            // game.player.mov_dir.x = 1;
-            // update_player(&game);
-            mlx_hook(game.win, 3, 1L << 1, update_key_up, (void *)&game);
-            mlx_hook(game.win, 2, 1L << 0, update_key_down, (void *)&game);
-            mlx_hook(game.win, 17, 0, close_game, (void *)&game);
-            mlx_loop_hook(game.mlx, update, (void *)&game);
-            mlx_loop(game.mlx);
+            gaming(&game);
         }
     }
     return (0);
