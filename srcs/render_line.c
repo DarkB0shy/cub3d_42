@@ -54,6 +54,8 @@ void    render_line(t_game *game, int x)
 		game->ray.color = 2;
 	else if (game->ray.side == 0)
 		game->ray.color = 3;
+	else if (game->ray.side == 2)
+		return ;
 	else
 		game->ray.color = 0;
 	draw_line_texture(game, x);

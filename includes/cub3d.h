@@ -33,7 +33,7 @@ char        *gnl(int fd);
 int			update_key_up(int key, t_game *game);
 int			update_key_down(int key, t_game *game);
 int			update(t_game *game);
-void		casting_ray(t_game *game);
+void		ray_casper(t_game *game);
 void    	render_line(t_game *game, int x);
 void		update_player(t_game *game);
 

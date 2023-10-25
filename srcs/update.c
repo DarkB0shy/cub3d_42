@@ -84,7 +84,7 @@ int update(t_game *game)
 {
     mlx_clear_window(game->mlx, game->win);
     draw_floor_and_ceiling(game);
-    casting_ray(game);
+    ray_casper(game);
     mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
     update_frames(game);
 	update_player(game);

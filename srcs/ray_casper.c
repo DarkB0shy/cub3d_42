@@ -56,6 +56,8 @@ static void	dda_part_two(t_game *game)
 			game->ray.side_dist.x += game->ray.delta_dist.x;
 			game->ray.map_x += game->ray.step_x;
 			game->ray.side = 0;
+			if (game->ray.side_dist.x == game->ray.delta_dist.x)
+				game->ray.side = 2;
 			if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
 				game->ray.hit = 1;
 		}
@@ -78,6 +80,8 @@ static void	get_line_dim(t_game *game)
 	else if (game->ray.side == 1)
 		game->ray.perp_wall_dist = (game->ray.side_dist.y
 				- game->ray.delta_dist.y);
+	else if (game->ray.side == 2)
+		return ;
 	game->ray.line_height = (int)(HEIGHT / game->ray.perp_wall_dist);
 	game->ray.draw_start.y = 0;
 	game->ray.draw_start.y = -game->ray.line_height / 2 + HEIGHT / 2;
@@ -88,7 +92,7 @@ static void	get_line_dim(t_game *game)
 		game->ray.draw_end.y = HEIGHT - 1;
 }
 
-void	casting_ray(t_game *game)
+void	ray_casper(t_game *game)
 {
 	int		x;
 

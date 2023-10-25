@@ -1,5 +1,13 @@
                                                                                                     UNHOLY_BUG
 
+INCIPIT:
+        After looking for several source codes/documentation about this project I tried to implement tde-nico cub3d raycasting
+        algorithm in "my Cub3d". However I noticed (in his program) the rendering was giving nasty problems whenever
+        the player spawned next to a wall, "making you see through the wall" until you moved the character a bit (WASD).
+        So I tried to find out what was causing the problem, during this process I was lost, at some point I even thought
+        there was nothing I could do and that maybe it was a MINILIBX problem. However I was able to find another cub3d from
+        a random guy on the internet, and in his program the rendering was always fine, even with player spawning at corners.
+
 $make
 $./cub4d maps/smth_wrong.cub
 
@@ -40,13 +48,13 @@ VALUES after game->ray.side_dist.x && game->ray.delta_dist.x == 1523.809524
                     .                               .
                 10.025063                       5.012531
 
-Feels like the program does not render what's there when delta_dist.x is side_dist.x / 2 or maybe it renders and draws more walls
+Feels like the program does not render what's there when delta_dist.x is side_dist.x / 2 or maybe it renders, but draws more walls
 on top of those.
 
 if (game->ray.side_dist.x == game->ray.delta_dist.x)
 	game->ray.side = 2 ;
 
-This (casting_ray.c/63) avoids executing "useless" istructions when those values are the same. 1523 value stopped appearing. I
+This (casting_ray.c/63) avoids executing "useless" istructions when those values are the same. 1523 stops appearing. I
 also addedd a condition inside get_line_dim (casting_ray.c) that handles game->ray.side == 2. It just returns ;
 This made the rendering a bit better but it's still not showing the wall the player "spawned into".
 That game->ray.side = 2 MUST and I mean MUST be handled inside render_line/render_line.c.
