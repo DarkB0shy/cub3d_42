@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 LIB1 = ar -rcs
 LIB2 = ranlib

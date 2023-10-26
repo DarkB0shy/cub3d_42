@@ -212,11 +212,11 @@ void    check_background_color(t_game *game)
         }
         else if (game->cub_file.file_matrix[i][j] == 'C')
         {
-            if (!game->cub_file.f_color)
-            {
-                free(game->cub_file.c_color);
-                std_errore("F RGB value must come before C value\n");
-            }
+            // if (!game->cub_file.f_color)
+            // {
+            //     free(game->cub_file.c_color);
+            //     std_errore("F RGB value must come before C value\n");
+            // }
             if (flag == 1)
             {
                 free(game->cub_file.f_color);

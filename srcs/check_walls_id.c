@@ -26,7 +26,7 @@ void	check_walls_id(t_game *game)
                         game->cub_file.nord_path = ft_strdup(game->cub_file.file_matrix[i]);
                     }
 					else
-						std_errore("missing/wrong wall identifier\n");
+						std_errore("missingNO wall identifier\n");
 					break;
 				}
 				else if (game->cub_file.file_matrix[i][j] == 'S')
@@ -41,7 +41,7 @@ void	check_walls_id(t_game *game)
                         game->cub_file.sud_path = ft_strdup(game->cub_file.file_matrix[i]);
                     }
 					else
-						std_errore("missing/wrong wall identifier\n");
+						std_errore("missing SO wall identifier\n");
 					break;
 				}
 				else if (game->cub_file.file_matrix[i][j] == 'W')
@@ -56,7 +56,7 @@ void	check_walls_id(t_game *game)
                         game->cub_file.west_path = ft_strdup(game->cub_file.file_matrix[i]);
                     }
 					else
-						std_errore("missing/wrong wall identifier\n");
+						std_errore("missing WE wall identifier\n");
 					break;
 				}
 				else if (game->cub_file.file_matrix[i][j] == 'E')
@@ -75,18 +75,24 @@ void	check_walls_id(t_game *game)
                         }
                     }
 					else
-						std_errore("missing/wrong wall identifier\n");
+						std_errore("missing EA wall identifier\n");
 					break;
 				}
                 if (game->cub_file.nord_path && game->cub_file.sud_path && game->cub_file.west_path && game->cub_file.east_path)
                     break ;
                 else
-                    std_errore("at least one wall identifier is wrong\n");
+                {
+                    if (game->cub_file.file_matrix[i][j] == 'F' || game->cub_file.file_matrix[i][j] == 'C' || 
+                        game->cub_file.file_matrix[i][j] == 'N' || game->cub_file.file_matrix[i][j] == 'S' ||
+                        game->cub_file.file_matrix[i][j] == 'W' || game->cub_file.file_matrix[i][j] == 'E')
+                        break ;
+                    else
+                        std_errore("at least one wall identifier is wrong\n");
+                }
 			}
 			j++;
-
 		}
-		i++;
+        i++;
     }
 }
 

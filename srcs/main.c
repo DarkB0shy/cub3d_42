@@ -56,7 +56,7 @@ int main (int argc, char **argv)
     int     fd;
 
     if (argc != 2)
-        std_errore("correct use is ./cub3d path/to/map\n");
+      std_errore("correct use is ./cub3d path/to/map\n");
     else
     {
         fd = 0;
@@ -65,8 +65,8 @@ int main (int argc, char **argv)
             std_errore("file must exist\n");
         else
         {
-            init_map(&game, argv[1]);
             close(fd);
+            init_map(&game, argv[1]);
             init_player_and_textures(&game);
             gaming(&game);
         }
