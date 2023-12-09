@@ -1,43 +1,5 @@
 #include "cub3d.h"
-
-static void    save_background_values(t_game *game)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (game->cub_file.f_color[i])
-    {
-        if (ft_isdigit(game->cub_file.f_color[i]))
-        {
-            while (ft_isdigit(game->cub_file.f_color[i]))
-            {
-                game->map->floor_color[j] = (game->map->floor_color[j] * 10) + (game->cub_file.f_color[i] - 48);
-                i++;
-            }
-            j++;
-        }
-        i++;
-    }
-
-    i = 0;
-    j = 0;
-    while (game->cub_file.c_color[i])
-    {
-        if (ft_isdigit(game->cub_file.c_color[i]))
-        {
-            while (ft_isdigit(game->cub_file.c_color[i]))
-            {
-                game->map->ceiling_color[j] = (game->map->ceiling_color[j] * 10) + (game->cub_file.c_color[i] - 48);
-                i++;
-            }
-            j++;
-        }
-        i++;
-    }
-}
-
+                                                                    // FLOOR RGB
 static void    check_if_floor_input_ok(t_game *game)
 {
     int     i;
@@ -98,6 +60,7 @@ static void    check_if_floor_input_ok(t_game *game)
         std_errore("RBG floor value is unvalid\n");
 }
 
+                                                                        // CEILING RGB
 static void    check_if_ceiling_input_ok(t_game *game)
 {
     int     i;
@@ -182,6 +145,48 @@ static void check_rgbs(t_game *game)
     {
         if (!check_rgb_range(game->map->ceiling_color[i]))
             std_errore("RGB ceiling values must be between 0 and 255\n");
+        i++;
+    }
+}
+
+static void    save_background_values(t_game *game)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (game->cub_file.f_color[i])
+    {
+        if (ft_isdigit(game->cub_file.f_color[i]))
+        {
+            while (ft_isdigit(game->cub_file.f_color[i]))
+            {
+                game->map->floor_color[j] = (game->map->floor_color[j] * 10) + (game->cub_file.f_color[i] - 48);
+                i++;
+            }
+            j++;
+        }
+        if (game->cub_file.f_color[i] == '\0')
+            break ;
+        i++;
+    }
+
+    i = 0;
+    j = 0;
+    while (game->cub_file.c_color[i])
+    {
+        if (ft_isdigit(game->cub_file.c_color[i]))
+        {
+            while (ft_isdigit(game->cub_file.c_color[i]))
+            {
+                game->map->ceiling_color[j] = (game->map->ceiling_color[j] * 10) + (game->cub_file.c_color[i] - 48);
+                i++;
+            }
+            j++;
+        }
+        if (game->cub_file.c_color[i] == '\0')
+            break ;
         i++;
     }
 }
