@@ -1,7 +1,23 @@
 #ifndef CUB3_D_STRUCTS
 #define CUB3_D_STRUCTS
 
+# include <math.h>
+# include <fcntl.h>
+# include <sys/time.h>
+# include <stdio.h>
 # include "../libs/libft/libft.h"
+# include "../libs/mlx/mlx.h"
+# include "../libs/mlx_linux/mlx.h"
+
+// What follows is not a list of global variables. THESE are MACROS: their value does not change
+# define FPS_LOCK 30
+# define PLAYER_FOV 0.42
+# define PLAYER_SPEED 3.0
+# define PLAYER_ROTATION_SPEED 1.4
+# define HEIGHT 720
+# define WIDTH 1280
+# define TEXTURE_SIZE 64
+# define FILE_SIZE 75
 
 typedef struct cubfile
 {

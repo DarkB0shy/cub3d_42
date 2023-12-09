@@ -1,23 +1,7 @@
 #ifndef CUB3_D
 # define CUB3_D
 
-# include <math.h>
-# include <fcntl.h>
-# include <sys/time.h>
-# include <stdio.h>
-# include "cub3d_structs.h"
-# include "../libs/mlx/mlx.h"
-# include "../libs/mlx_linux/mlx.h"
-
-// What follows is not a list of global variables. THESE are MACROS: their value does not change
-# define FPS_LOCK 30
-# define PLAYER_FOV 0.42
-# define PLAYER_SPEED 3.0
-# define PLAYER_ROTATION_SPEED 1.4
-# define HEIGHT 720
-# define WIDTH 1280
-# define TEXTURE_SIZE 64
-# define FILE_SIZE 75
+#include "cub3d_structs.h"
 
 // Parsing
 void	    init_map(t_game *game, char *file);
@@ -25,6 +9,11 @@ void		init_player_and_textures(t_game *game);
 void    	check_walls_id_one(t_game *game);
 void        check_walls_path(t_game *game);
 void        check_background_color(t_game *game);
+void        check_RGB_ceiling_input(t_game *game);
+void        check_RGB_floor_input(t_game *game);
+void        save_background_values(t_game *game);
+void        save_background_values_two(t_game *game);
+void        check_rgbs(t_game *game);
 void        parse_map(t_game *game, int file_len);
 char        *gnl(int fd);
 
