@@ -1,9 +1,51 @@
 #include "cub3d.h"
                                                                     // FLOOR RGB
-static void    check_if_floor_input_ok(t_game *game)
+int validate_individual_RGB_value(char *f_color, int *i, int *count)
 {
-    int     i;
-    int     count;
+    while (f_color[*i] && ft_isdigit(f_color[*i]))
+        (*i)++;
+    if (*count == 2)
+        return 1;
+    if (f_color[*i] && *count < 3 && f_color[*i] == ',')
+    {
+        (*count)++;
+        (*i)++;
+    }
+    while (f_color[*i] == 32)
+        (*i)++;
+    if (f_color[*i] == '\0')
+        return 1;
+    if (!ft_isdigit(f_color[*i]))
+        std_errore("invalid character in RGB floor/ceiling value\n");
+    return 0;
+}
+
+void validate_RGB_floor_input(t_game *game, int *i, int *count)
+{
+    while (game->cub_file.f_color[*i])
+    {
+        while (game->cub_file.f_color[*i] == 32)
+            (*i)++;
+        while (game->cub_file.f_color[*i] && ft_isdigit(game->cub_file.f_color[*i]))
+            (*i)++;
+        if (validate_individual_RGB_value(game->cub_file.f_color, i, count))
+            break;
+        while (game->cub_file.f_color[*i] == 32)
+            (*i)++;
+        if (game->cub_file.f_color[*i] == '\n' || game->cub_file.f_color[*i] == '\0')
+        {
+            (*count)++;
+            break;
+        }
+        if (validate_individual_RGB_value(game->cub_file.f_color, i, count))
+            break;
+    }
+}
+
+void check_RGB_floor_input(t_game *game)
+{
+    int i;
+    int count;
 
     i = 0;
     count = 0;
@@ -11,60 +53,45 @@ static void    check_if_floor_input_ok(t_game *game)
     {
         if (game->cub_file.f_color[i] == 32)
             i++;
-        else if (game->cub_file.f_color[i] && game->cub_file.f_color[i] == 'F')
+        else if (game->cub_file.f_color[i] == 'F')
         {
             i++;
-            while (game->cub_file.f_color[i])
-            {
-                while (game->cub_file.f_color[i] == 32) // white space
-                    i++;
-                while (game->cub_file.f_color[i] && ft_isdigit(game->cub_file.f_color[i])) // digits
-                    i++;
-                if (count == 3)
-                    break;
-                while (game->cub_file.f_color[i] == 32) // white spaces
-                    i++;
-                if (game->cub_file.f_color[i] == '\n' || game->cub_file.f_color[i] == '\0')
-                {
-                    count++;
-                    break;
-                }
-                if (game->cub_file.f_color[i] && count < 4 && game->cub_file.f_color[i] == 44) // comma
-                {
-                    count++;
-                    i++;
-                }
-                while (game->cub_file.f_color[i] == 32) // white spaces
-                    i++;
-                if (!ft_isdigit(game->cub_file.f_color[i]))
-                    std_errore("invalid character in RBG floor value\n");
-            }
+            validate_RGB_floor_input(game, &i, &count);
         }
-        if (count == 3)
+        if (count == 2)
             break;
         i++;
     }
-    if (count == 3)
+    if (count != 2)
+        std_errore("RGB floor value is invalid\n");
+}
+                                                                        // CEILING RGB
+void validate_RGB_ceiling_input(t_game *game, int *i, int *count)
+{
+    while (game->cub_file.c_color[*i])
     {
-        if (game->cub_file.f_color[i] == '\0' || game->cub_file.f_color[i] == '\n')
-            return ;
-        else
+        while (game->cub_file.c_color[*i] == 32)
+            (*i)++;
+        while (game->cub_file.c_color[*i] && ft_isdigit(game->cub_file.c_color[*i]))
+            (*i)++;
+        if (validate_individual_RGB_value(game->cub_file.c_color, i, count))
+            break;
+        while (game->cub_file.c_color[*i] == 32)
+            (*i)++;
+        if (game->cub_file.c_color[*i] == '\n' || game->cub_file.c_color[*i] == '\0')
         {
-            while (ft_isdigit(game->cub_file.f_color[i]))
-                i++;
-            if (game->cub_file.f_color[i] && !ft_isdigit(game->cub_file.f_color[i]))
-                count++;
+            (*count)++;
+            break;
         }
+        if (validate_individual_RGB_value(game->cub_file.c_color, i, count))
+            break;
     }
-    if (count != 3)
-        std_errore("RBG floor value is unvalid\n");
 }
 
-                                                                        // CEILING RGB
-static void    check_if_ceiling_input_ok(t_game *game)
+void check_RGB_ceiling_input(t_game *game)
 {
-    int     i;
-    int     count;
+    int i;
+    int count;
 
     i = 0;
     count = 0;
@@ -72,55 +99,79 @@ static void    check_if_ceiling_input_ok(t_game *game)
     {
         if (game->cub_file.c_color[i] == 32)
             i++;
-        else if (game->cub_file.c_color[i] && game->cub_file.c_color[i] == 'C')
+        else if (game->cub_file.c_color[i] == 'C')
         {
             i++;
-            while (game->cub_file.c_color[i])
-            {
-                while (game->cub_file.c_color[i] == 32) // white space
-                    i++;
-                while (game->cub_file.c_color[i] && ft_isdigit(game->cub_file.c_color[i])) // digits
-                    i++;
-                if (count == 3)
-                    break;
-                while (game->cub_file.c_color[i] == 32) // white spaces
-                    i++;
-                if (game->cub_file.c_color[i] == '\n' || game->cub_file.c_color[i] == '\0')
-                {
-                    count++;
-                    break;
-                }
-                if (game->cub_file.c_color[i] && count < 4 && game->cub_file.c_color[i] == 44) // comma
-                {
-                    count++;
-                    i++;
-                }
-                while (game->cub_file.c_color[i] == 32) // white spaces
-                    i++;
-                if (!ft_isdigit(game->cub_file.c_color[i]))
-                    std_errore("invalid character in RBG ceiling value\n");
-            }
+            validate_RGB_ceiling_input(game, &i, &count);
         }
-        if (count == 3)
+        if (count == 2)
             break;
         i++;
     }
-    if (count == 3)
-    {
-        if (game->cub_file.c_color[i] == '\0' || game->cub_file.c_color[i] == '\n')
-            return ;
-        else
-        {
-            while (ft_isdigit(game->cub_file.c_color[i]))
-                i++;
-            if (game->cub_file.c_color[i] && !ft_isdigit(game->cub_file.c_color[i]))
-                count++;
-        }
-    }
-    if (count != 3)
-        std_errore("RBG ceiling value is unvalid\n");
+    if (count != 2)
+        std_errore("RGB ceiling value is invalid\n");
 }
 
+// static void    check_if_ceiling_input_ok(t_game *game)
+// {
+//     int     i;
+//     int     count;
+
+//     i = 0;
+//     count = 0;
+//     while (game->cub_file.c_color[i])
+//     {
+//         if (game->cub_file.c_color[i] == 32)
+//             i++;
+//         else if (game->cub_file.c_color[i] && game->cub_file.c_color[i] == 'C')
+//         {
+//             i++;
+//             while (game->cub_file.c_color[i])
+//             {
+//                 while (game->cub_file.c_color[i] == 32) // white space
+//                     i++;
+//                 while (game->cub_file.c_color[i] && ft_isdigit(game->cub_file.c_color[i])) // digits
+//                     i++;
+//                 if (count == 3)
+//                     break;
+//                 while (game->cub_file.c_color[i] == 32) // white spaces
+//                     i++;
+//                 if (game->cub_file.c_color[i] == '\n' || game->cub_file.c_color[i] == '\0')
+//                 {
+//                     count++;
+//                     break;
+//                 }
+//                 if (game->cub_file.c_color[i] && count < 4 && game->cub_file.c_color[i] == 44) // comma
+//                 {
+//                     count++;
+//                     i++;
+//                 }
+//                 while (game->cub_file.c_color[i] == 32) // white spaces
+//                     i++;
+//                 if (!ft_isdigit(game->cub_file.c_color[i]))
+//                     std_errore("invalid character in RBG ceiling value\n");
+//             }
+//         }
+//         if (count == 3)
+//             break;
+//         i++;
+//     }
+//     if (count == 3)
+//     {
+//         if (game->cub_file.c_color[i] == '\0' || game->cub_file.c_color[i] == '\n')
+//             return ;
+//         else
+//         {
+//             while (ft_isdigit(game->cub_file.c_color[i]))
+//                 i++;
+//             if (game->cub_file.c_color[i] && !ft_isdigit(game->cub_file.c_color[i]))
+//                 count++;
+//         }
+//     }
+//     if (count != 3)
+//         std_errore("RBG ceiling value is unvalid\n");
+// }
+                                                         // OTHER STUFF
 static int  check_rgb_range(int noomba)
 {
     if (noomba >= 0 && noomba <= 255)
@@ -244,8 +295,8 @@ void    check_background_color(t_game *game)
     }
     if (!game->cub_file.f_color || !game->cub_file.c_color)
         std_errore("missing floor/ceiling RGB identifier\n");
-    check_if_floor_input_ok(game);
-    check_if_ceiling_input_ok(game);
+    check_RGB_floor_input(game);
+    check_RGB_ceiling_input(game);
     save_background_values(game);
     check_rgbs(game);
 }
