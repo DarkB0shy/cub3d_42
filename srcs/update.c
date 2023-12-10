@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 12:53:29 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 12:54:18 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	update_key_down(int key, t_game *game)
@@ -19,7 +31,7 @@ int	update_key_down(int key, t_game *game)
 	return (0);
 }
 
-int update_key_up(int key, t_game *game)
+int	update_key_up(int key, t_game *game)
 {
 	if (key == 13 || key == 1 || key == 119 || key == 115)
 		game->player.mov_dir.x = 0;
@@ -30,7 +42,6 @@ int update_key_up(int key, t_game *game)
 		game->player.rot_dir = 0;
 	return (0);
 }
-
 
 static void	draw_floor_and_ceiling(t_game *game)
 {
@@ -60,7 +71,7 @@ static void	draw_floor_and_ceiling(t_game *game)
 	}
 }
 
-static void update_frames(t_game *game)
+static void	update_frames(t_game *game)
 {
 	char	*curr_fps;
 
@@ -80,13 +91,13 @@ static void update_frames(t_game *game)
 	free(curr_fps);
 }
 
-int update(t_game *game)
+int	update(t_game *game)
 {
-    mlx_clear_window(game->mlx, game->win);
-    draw_floor_and_ceiling(game);
-    casting_ray(game);
-    mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
-    update_frames(game);
+	mlx_clear_window(game->mlx, game->win);
+	draw_floor_and_ceiling(game);
+	casting_ray(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
+	update_frames(game);
 	update_player(game);
-    return (0);
+	return (0);
 }

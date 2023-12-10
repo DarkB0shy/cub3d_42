@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_line.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 12:49:26 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 12:51:43 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	get_texture_x(t_game *game)
@@ -37,12 +49,13 @@ static void	draw_line_texture(t_game *game, int x)
 	{
 		tex.y = (int)tex_pos & (TEXTURE_SIZE - 1);
 		tex_pos += step;
-		color = *(unsigned int *)(game->walls[game->ray.color].addr + 4 * (TEXTURE_SIZE * (int)tex.y + (int)tex.x));
+		color = *(unsigned int *)(game->walls[game->ray.color].addr
+				+ 4 * (TEXTURE_SIZE * (int)tex.y + (int)tex.x));
 		my_mlx_pixel_put(&game->screen, x, y, color);
 	}
 }
 
-void    render_line(t_game *game, int x)
+void	render_line(t_game *game, int x)
 {
 	if (game->ray.side == 1 && game->player.pos.y <= game->ray.map_y)
 		game->ray.color = 1;
@@ -52,6 +65,8 @@ void    render_line(t_game *game, int x)
 		game->ray.color = 2;
 	else if (game->ray.side == 0)
 		game->ray.color = 3;
+	else if (game->ray.side == 2)
+		return ;
 	else
 		game->ray.color = 0;
 	draw_line_texture(game, x);

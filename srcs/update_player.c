@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_player.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 12:52:39 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 12:53:11 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_wall_collision(t_game *game, double y, double x)
@@ -85,7 +97,7 @@ void	update_player(t_game *game)
 	game->player.mov_speed.x = game->frame_time * PLAYER_SPEED;
 	game->player.mov_speed.y = game->frame_time * PLAYER_SPEED;
 	game->player.rot_speed = game->frame_time * PLAYER_ROTATION_SPEED;
-    update_player_x(game);
-    update_player_y(game);
-    update_player_rot(game);
+	update_player_x(game);
+	update_player_y(game);
+	update_player_rot(game);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   casting_ray.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 11:07:46 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 11:07:49 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	init_raycast_on_x(t_game *game, int x)
@@ -101,6 +113,6 @@ void	casting_ray(t_game *game)
 		dda_part_one(game);
 		dda_part_two(game);
 		get_line_dim(game);
-        render_line(game, x);
+		render_line(game, x);
 	}
 }

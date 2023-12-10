@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 12:30:45 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 12:33:35 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_format_file(char *str)
@@ -17,14 +29,14 @@ static int	check_format_file(char *str)
 		if (str[i] == 'c')
 			i--;
 		if (str[i] == '.')
-			return(0);
+			return (0);
 		std_errore("wrong file extension: must be .cub\n");
 	}
 }
 
-static void init_map_and_cub_file_struct(t_game *game)
+static void	init_map_and_cub_file_struct(t_game *game)
 {
-    game->map = malloc(sizeof(t_map));
+	game->map = malloc(sizeof(t_map));
 	game->map->nord = NULL;
 	game->map->sud = NULL;
 	game->map->west = NULL;
@@ -81,7 +93,6 @@ static int	parse_cub_file(t_game *game, char *file)
 
 	check_format_file(file);
 	game->cub_file.file_matrix = malloc(sizeof(char *) * FILE_SIZE);
-	game->cub_file.file_matrix[0] = 0;
 	fd = open(file, O_RDONLY);
 	i = -1;
 	while (1)
@@ -89,8 +100,8 @@ static int	parse_cub_file(t_game *game, char *file)
 		temp = NULL;
 		temp = gnl(fd);
 		if (!temp)
-			break;
-		if (temp[0] == '!') // does not parse completely empty (whitespaces) lines
+			break ;
+		if (temp[0] == '!')
 			free(temp);
 		else
 		{

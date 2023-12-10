@@ -1,5 +1,17 @@
-#ifndef CUB3_D_STRUCTS
-#define CUB3_D_STRUCTS
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_structs.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcarassi <dcarassi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 12:58:34 by dcarassi          #+#    #+#             */
+/*   Updated: 2023/12/10 13:00:59 by dcarassi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_STRUCTS_H
+# define CUB3D_STRUCTS_H
 
 # include <math.h>
 # include <fcntl.h>
@@ -9,7 +21,6 @@
 # include "../libs/mlx/mlx.h"
 # include "../libs/mlx_linux/mlx.h"
 
-// What follows is not a list of global variables. THESE are MACROS: their value does not change
 # define FPS_LOCK 30
 # define PLAYER_FOV 0.42
 # define PLAYER_SPEED 3.0
@@ -21,7 +32,7 @@
 
 typedef struct cubfile
 {
-	char 	**file_matrix;
+	char	**file_matrix;
 	char	*nord_path;
 	char	*sud_path;
 	char	*east_path;
@@ -35,7 +46,6 @@ typedef struct s_vec2
 	double	x;
 	double	y;
 }	t_vec2;
-
 
 typedef struct s_image
 {
@@ -109,4 +119,4 @@ typedef struct s_game
 	int			fps;
 }	t_game;
 
-# endif
+#endif
