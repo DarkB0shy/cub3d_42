@@ -1,0 +1,28 @@
+I realized there is no point in trying to understand mathematics. What I did was "move the player slighlty away from the wall"
+and make it stop immediately after. This only works with player facing North and a wall (1) on his left side. But it should
+work with every spawning orientation as long as the player slightly moves according to the following "rule":
+          (N -> game.player.mov_dir.y = 1) When player has a wall on his left side.
+Yeah. Good luck making it work with NSWE and 4 possible walls configuration bud.
+
+          LEONE BLEAHNCO CON GLI OCCHIALI! ESAGERATO E TROPPO CONVINTO DI SE! PERSINO PER UNO DELLA SUA ISTANZA!
+                          Fate parecchia attenzione a lui e a quelli che gli Secondigliano.
+                               Tendono a ricordarsi tutto e a serbare rancore x sempre.
+
+However implementing an algorithm that slightly moves the player only when he spawns next to walls, according to his spawning
+orientation and which side/s he's surrounded by walls, made me feel like the bug was still there. Because it was.
+So, I gave up and studied the code I was using. The "bug" was inside dda_part_two where 1.0 was being added to
+game->ray.map_x - game->player.pos.x and game->ray.map_y - game->player.pos.y. I did some tests, eventually, I found out the
+problem was the other "if blocks" that were left untouched. By adding 0.1 to game->player.pos.x - game->ray.map_x and 
+game->player.pos.y - game->ray.map_y the rendering is swell, both when player spawns next to wall/s and when he does not.
+I'm 95% sure I didn't add any more code to the tde-nico_cub3d algorithm. It was just adding 0.1 to those calculations that did the trick. Ok, I also handled game->ray.side = 2, that should avoid some calculations. See unholy_bug.txt for further documentation.
+I knew it was possible to fix the unholy_bug BECAUSE the program renders everything perfectly when you move. It didn't make any sense to me that making the player spawn next to walls made this raycasting algorithm go badonkers. Now let's hear it for the homeboy
+
+                                                        JOE     CASSANO
+
+                                                           JONNY  JAB
+
+                                                              RIP
+
+                                                           3/04/1999
+
+Last update: adding 0.00001 instead of 0.1 during the calulations makes the rendering even smoother. Now it's perfect imo.
